@@ -10,7 +10,7 @@ IEventBusHolder get EventBusHolder {
   _eventBusHolder ??= EventBusHolderImpl()
     ..addEventBus(AppEventBus())
     ..addEventBus(CommandEventBus())
-    ..addEventBus(UIEventBus());
+    ..addEventBus(UiEventBus());
   return _eventBusHolder!;
 }
 

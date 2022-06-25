@@ -19,7 +19,7 @@ void cleanBuzz() {
 abstract class IBuzzBase {
   AppEventBus get appEvents;
   CommandEventBus get commands;
-  UIEventBus get uiEvents;
+  UiEventBus get uiEvents;
 
   Navigator get navigator;
 
@@ -42,7 +42,7 @@ class BuzzBase implements IBuzzBase {
   CommandEventBus get commands => EventBusHolder.of<CommandEventBus>();
 
   @override
-  UIEventBus get uiEvents => EventBusHolder.of<UIEventBus>();
+  UiEventBus get uiEvents => EventBusHolder.of<UiEventBus>();
 
   late Navigator _navigator;
 

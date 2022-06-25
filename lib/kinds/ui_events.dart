@@ -1,26 +1,26 @@
 import '../infra/typed_event_bus.dart';
 
-abstract class UIEvent {}
+abstract class UiEvent {}
 
-abstract class UIEventHandler extends TypedEventHandler<UIEvent> {
-  void handle(UIEvent uiEvent);
+abstract class UIEventHandler extends TypedEventHandler<UiEvent> {
+  void handle(UiEvent uiEvent);
 }
 
-class UIEventBus extends TypedEventBus<UIEvent> {
+class UiEventBus extends TypedEventBus<UiEvent> {
   @override
   bool isTypeSupported(dynamic type) {
-    return type is UIEvent;
+    return type is UiEvent;
   }
 }
 
-class OnTapped extends UIEvent {}
+class OnTapped extends UiEvent {}
 
 enum OnScrollDirection {
   up,
   down,
 }
 
-abstract class OnScroll extends UIEvent {
+abstract class OnScroll extends UiEvent {
   OnScrollDirection get direction;
 }
 
@@ -29,21 +29,21 @@ enum OnSwipeDirection {
   right,
 }
 
-abstract class OnSwipe extends UIEvent {
+abstract class OnSwipe extends UiEvent {
   OnSwipeDirection get direction;
 }
 
-abstract class OnToggleChanged extends UIEvent {
+abstract class OnToggleChanged extends UiEvent {
   bool get isEnabled;
   bool get isDisabled => !isEnabled;
 }
 
-abstract class OnFocusChanged extends UIEvent {
+abstract class OnFocusChanged extends UiEvent {
   bool get hasFocus;
 }
 
-class OnValueChanged extends UIEvent {}
+class OnValueChanged extends UiEvent {}
 
-class OnValuePasted extends UIEvent {}
+class OnValuePasted extends UiEvent {}
 
-class OnValueCopied extends UIEvent {}
+class OnValueCopied extends UiEvent {}
