@@ -1,5 +1,6 @@
 import 'package:buzz/buzz.dart';
 
+import 'infra/registries.dart';
 import 'utils.dart';
 
 IBuzzBase? _buzz;
@@ -45,19 +46,18 @@ class BuzzBase implements IBuzzBase {
   UiEventBus get uiEvents => EventBusHolder.of<UiEventBus>();
 
   late Navigator _navigator;
+  List<ModuleBuzzRegistries>? _moduleRegistries;
 
   @override
   void init({
     required Navigator navigator,
+    List<ModuleBuzzRegistries>? moduleRegistries,
   }) {
     _navigator = navigator;
+    _moduleRegistries = moduleRegistries;
 
-    commands.on<NavigationCommand>().listen((navigationCommand) {
-      NavigationCommandHandler(
-        navigator: _navigator,
-        backDefault: _navigator.backDefaultRoute,
-      ).handle(navigationCommand);
-    });
+    _bindNavigationCommandHandler();
+    _bindRegistries();
   }
 
   @override
@@ -72,5 +72,22 @@ class BuzzBase implements IBuzzBase {
   @override
   void destroy() {
     //TODO: implement
+  }
+
+  void _bindNavigationCommandHandler() {
+    commands.on<NavigationCommand>().listen((navigationCommand) {
+      NavigationCommandHandler(
+        navigator: _navigator,
+        backDefault: _navigator.backDefaultRoute,
+      ).handle(navigationCommand);
+    });
+  }
+
+  void _bindRegistries() {
+    _moduleRegistries?.forEach((moduleRegistry) {
+      uiEvents.bindRegistries(moduleRegistry.uiEvents);
+      commands.bindRegistries(moduleRegistry.commands);
+      appEvents.bindRegistries(moduleRegistry.appEvents);
+    });
   }
 }
