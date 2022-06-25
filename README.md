@@ -16,7 +16,8 @@ Opinionated modern event based application development framework.
 
 ### Upcoming
 
-- Default navigator using Flutter Navigator 2.0 
+- Default navigator using Flutter Navigator 2.0.
+- Support adding custom TypedEventHandlers and EventBuses.
 
 ## Installation
 
@@ -27,20 +28,69 @@ buzz:
       ref: main
 ```
 
-## Usage
+## Initialization
 
-### Initialization
-
-``dart
+```dart
 Buzz..init(
   navigator: MyAppNavigator(),
-),
+);
 ```
 
-### Fire Events
+## Fire Events
 
-TODO: Add
+By default the framework supports firing three base class events: 
+- `UiEvent`
+- `Command`
+- `AppEvent`
 
-### Listen Events
+Find pre-defined [out-of-the-box supported events](./docs/EVENTS.md).
 
-TODO: Add
+### UiEvents
+
+The library comes with a few pre-defined `UiEvents` you can find [here](./docs/EVENTS.md).
+
+For example, when a button/label is tapped:
+
+```dart
+ElevatedButton(
+  onPressed: () {
+    Buzz.fire(OnTapped());
+  },
+  child: Text('Tap me!'),
+)
+```
+
+### NavigationCommands
+
+The library comes with a few pre-defined `NavigationCommands` you can find [here](./docs/EVENTS.md).
+
+Go to a route:
+
+```dart
+Buzz.fire(
+  NavigateToCommand.named('/my-route'),
+);
+```
+
+or go back to previous route:
+
+```dart
+Buzz.fire(NavigateBackCommand());
+```
+
+## Listen Events
+
+Use the `on` method from the `TypedEventBus` component to get a `Stream` to listen events of a specific class type.
+
+For example, here is how we setup the listener for `NavigationCommands` as part of the features ready for you to use, this happens behind the insides:
+
+```dart
+final commandBus = EventBusHolder.of<CommandEventBus>();
+final navigationCommandStream = commandBus.on<NavigationCommand>();
+navigationCommandStream.listen((navigationCommand) {
+  NavigationCommandHandler(
+    navigator: _navigator,
+    backDefault: _navigator.backDefaultRoute,
+  ).handle(navigationCommand);
+});
+```
