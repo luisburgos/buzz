@@ -12,7 +12,7 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  TypedEventBus ofKind(dynamic type) {
+  TypedEventBus forKind(dynamic type) {
     TypedEventBus? eventBus;
 
     for (var value in _allStreamBuses.values) {
@@ -34,11 +34,11 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  TypedEventBus of<Type>() {
+  X of<X extends TypedEventBus>() {
     TypedEventBus? eventBus;
 
     for (var entry in _allStreamBuses.entries) {
-      if (entry.key == Type) {
+      if (entry.key == X) {
         eventBus = entry.value;
       }
 
@@ -48,9 +48,9 @@ class EventBusHolderImpl implements IEventBusHolder {
     }
 
     if (eventBus != null) {
-      return eventBus;
+      return eventBus as X;
     } else {
-      throw BusNotFound(Type.toString());
+      throw BusNotFound(X.toString());
     }
   }
 

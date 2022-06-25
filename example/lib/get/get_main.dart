@@ -27,9 +27,9 @@ void main() {
           name: AppRoutes.root,
           page: () => HomePage(
             onGoToProfilePressed: () {
-              Get.find<IBuzzBase>().defaultBuses!.commands.fire(
-                    NavigateToCommand.named(AppRoutes.profileRoot),
-                  );
+              Get.find<IBuzzBase>().fire(
+                NavigateToCommand.named(AppRoutes.profileRoot),
+              );
             },
           ),
         ),
@@ -37,9 +37,9 @@ void main() {
           name: AppRoutes.profileRoot,
           page: () => ProfilePage(
             onBackToHomePressed: () {
-              Get.find<IBuzzBase>().defaultBuses!.commands.fire(
-                    NavigateBackCommand(),
-                  );
+              Get.find<IBuzzBase>().fire(
+                NavigateBackCommand(),
+              );
             },
           ),
         ),

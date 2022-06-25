@@ -69,19 +69,19 @@ class NavigationCommandHandler extends TypedEventHandler<NavigationCommand> {
     if (command is NavigateBackCommand) {
       if (_canPop()) {
         navigator.back();
-        Buzz.defaultBuses!.fire(OnNavigatedBackEvent());
+        Buzz.fire(OnNavigatedBackEvent());
         return;
       }
 
       final fallback = command.preferredBackDefault ?? backDefault;
       navigator.offAndToNamed(fallback);
-      Buzz.defaultBuses!.fire(OnNavigatedBackEvent(fallbackPath: fallback));
+      Buzz.fire(OnNavigatedBackEvent(fallbackPath: fallback));
     }
 
     if (command is NavigateToCommand) {
       final path = command.directions.routeBuilder();
       navigator.toNamed(path);
-      Buzz.defaultBuses!.fire(OnNavigatedToEvent(path));
+      Buzz.fire(OnNavigatedToEvent(path));
     }
   }
 

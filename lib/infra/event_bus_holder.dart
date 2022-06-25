@@ -20,8 +20,8 @@ void cleanEventBusHolder() {
 }
 
 abstract class IEventBusHolder {
-  TypedEventBus of<Type>();
-  TypedEventBus ofKind(dynamic type);
+  X of<X extends TypedEventBus>();
+  TypedEventBus forKind(dynamic type);
   void addEventBus(TypedEventBus eventBus);
   void destroy();
 }

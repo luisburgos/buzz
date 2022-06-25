@@ -1,5 +1,7 @@
 import 'package:buzz/buzz.dart';
 
+import 'utils.dart';
+
 IBuzzBase? _buzz;
 
 /// Instance of Modular for search binds and route.
@@ -15,52 +17,55 @@ void cleanBuzz() {
 }
 
 abstract class IBuzzBase {
+  AppEventBus get appEvents;
+  CommandEventBus get commands;
+  UIEventBus get uiEvents;
+  Navigator get navigator;
+
   void init({
-    EventBusFacade? buses,
     required Navigator navigator,
   });
 
+  void fire(dynamic event);
   void destroy();
-
-  EventBusFacade get buses;
-  DefaultEventBusFacade? get defaultBuses;
-  Navigator get navigator;
 }
 
 class BuzzBase implements IBuzzBase {
   @override
-  EventBusFacade get buses => _buses;
-
-  @override
   Navigator get navigator => _navigator;
 
   @override
+  AppEventBus get appEvents => EventBusHolder.of<AppEventBus>();
 
-  ///TODO: Research how to provide default behavior.
-  DefaultEventBusFacade? get defaultBuses {
-    if (buses is DefaultEventBusFacade) {
-      return buses as DefaultEventBusFacade;
-    }
-    return null;
-  }
+  @override
+  CommandEventBus get commands => EventBusHolder.of<CommandEventBus>();
 
-  late EventBusFacade _buses;
+  @override
+  UIEventBus get uiEvents => EventBusHolder.of<UIEventBus>();
+
   late Navigator _navigator;
 
   @override
   void init({
-    EventBusFacade? buses,
     required Navigator navigator,
   }) {
-    _buses = buses ?? DefaultEventBusFacade();
     _navigator = navigator;
 
-    defaultBuses?.commands.on<NavigationCommand>().listen((navigationCommand) {
+    commands.on<NavigationCommand>().listen((navigationCommand) {
       NavigationCommandHandler(
         navigator: _navigator,
         backDefault: _navigator.backDefaultRoute,
       ).handle(navigationCommand);
     });
+  }
+
+  @override
+  void fire(event) {
+    try {
+      EventBusHolder.forKind(event).fire(event);
+    } catch (e) {
+      developerLog('$runtimeType $e');
+    }
   }
 
   @override

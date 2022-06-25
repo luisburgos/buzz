@@ -11,9 +11,9 @@ class ProfileModule extends Module {
           AppRoutes.profileRoot,
           child: (context, args) => ProfilePage(
             onBackToHomePressed: () {
-              Modular.get<IBuzzBase>().defaultBuses!.commands.fire(
-                    NavigateBackCommand(),
-                  );
+              Modular.get<IBuzzBase>().fire(
+                NavigateBackCommand(),
+              );
             },
           ),
         ),
