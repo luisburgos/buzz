@@ -32,6 +32,10 @@ dependencies:
   get: 4.6.5
   flutter_modular: 5.0.2
   get_storage: 2.0.3
+  profile:
+    path: './profile'
+  core:
+    path: './core'
   buzz:
     path: '../'
 

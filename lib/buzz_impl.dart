@@ -26,6 +26,7 @@ abstract class IBuzzBase {
 
   void init({
     required Navigator navigator,
+    List<ModuleBuzzRegistries>? moduleRegistries,
   });
 
   void fire(dynamic event);

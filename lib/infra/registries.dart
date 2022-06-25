@@ -17,21 +17,21 @@ abstract class ModuleBuzzRegistries extends _IModuleBuzzRegistries {
   List<UiEventRegistry> get uiEvents => const [];
 }
 
-abstract class UiEventRegistry extends EventHandlerRegistry<UiEvent> {
+class UiEventRegistry<U extends UiEvent> extends EventHandlerRegistry<U> {
   UiEventRegistry({
-    required Function(UiEvent) handler,
+    required Function(U) handler,
   }) : super(handler: handler);
 }
 
-abstract class CommandRegistry extends EventHandlerRegistry<Command> {
+class CommandRegistry<C extends Command> extends EventHandlerRegistry<C> {
   CommandRegistry({
-    required Function(Command) handler,
+    required Function(C) handler,
   }) : super(handler: handler);
 }
 
-abstract class AppEventRegistry extends EventHandlerRegistry<AppEvent> {
+class AppEventRegistry<A extends AppEvent> extends EventHandlerRegistry<A> {
   AppEventRegistry({
-    required Function(AppEvent) handler,
+    required Function(A) handler,
   }) : super(handler: handler);
 }
 

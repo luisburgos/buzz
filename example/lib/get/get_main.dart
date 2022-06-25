@@ -1,11 +1,11 @@
 import 'package:buzz/buzz.dart';
 import 'package:get/get.dart';
+import 'package:profile/profile.dart';
 
 import '../bootstrap.dart';
 import '../get/get_app_navigator.dart';
 import '../shared/app_routes.dart';
 import '../shared/modules/home/home_page.dart';
-import '../shared/modules/profile/profile_page.dart';
 import '../shared/not_found_page.dart';
 
 void main() {
@@ -17,8 +17,17 @@ void main() {
       ),
       initialBinding: BindingsBuilder(
         () {
+          Get.put<IProfileRepository>(ProfileRepository());
           Get.put(
-            Buzz..init(navigator: GetAppNavigator()),
+            Buzz
+              ..init(
+                navigator: GetAppNavigator(),
+                moduleRegistries: [
+                  ProfileModuleRegistries(
+                    () => Get.find<IProfileRepository>(),
+                  ),
+                ],
+              ),
           );
         },
       ),
@@ -41,6 +50,7 @@ void main() {
                 NavigateBackCommand(),
               );
             },
+            profileStream: Get.find<IProfileRepository>().profileStateChanges,
           ),
         ),
       ],
