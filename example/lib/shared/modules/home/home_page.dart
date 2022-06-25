@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../named_page.dart';
+import '../../named_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({

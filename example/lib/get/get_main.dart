@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '../bootstrap.dart';
 import '../get/get_app_navigator.dart';
 import '../shared/app_routes.dart';
+import '../shared/modules/home/home_page.dart';
+import '../shared/modules/profile/profile_page.dart';
 import '../shared/not_found_page.dart';
-import '../shared/pages/home_page.dart';
-import '../shared/pages/profile_page.dart';
 
 void main() {
   return bootstrap(
