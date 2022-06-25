@@ -2,12 +2,21 @@
 
 Opinionated modern event based application development framework. 
 
+## Documentation
+
+- Learn more about the pre-defined [EventBuses and Events](./docs/EVENT_BUSES.md).
+- Learn more how to create the required instance of the [Navigator](./docs/NAVIGATOR.md) component.
+
 ## Features
 
 - UIEvents
 - Commands
   - Navigation
 - AppEvents
+
+### Upcoming
+
+- Default navigator using Flutter Navigator 2.0 
 
 ## Installation
 
@@ -22,11 +31,11 @@ buzz:
 
 ### Initialization
 
-````dart
+``dart
 Buzz..init(
-    navigator: MyAppNavigator(),
+  navigator: MyAppNavigator(),
 ),
-````
+```
 
 ### Fire Events
 

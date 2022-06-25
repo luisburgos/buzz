@@ -20,6 +20,7 @@ abstract class IBuzzBase {
   AppEventBus get appEvents;
   CommandEventBus get commands;
   UIEventBus get uiEvents;
+
   Navigator get navigator;
 
   void init({
