@@ -44,12 +44,13 @@ void main() {
         ),
         GetPage(
           name: AppRoutes.profileRoot,
-          page: () => ProfilePage(
+          page: () => ProfileScreen(
             onBackToHomePressed: () {
               Get.find<IBuzzBase>().fire(
                 NavigateBackCommand(),
               );
             },
+            //TODO: Validate stream being injected here.
             profileStream: Get.find<IProfileRepository>().profileStateChanges,
           ),
         ),

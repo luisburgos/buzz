@@ -8,7 +8,7 @@ class NotFoundPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NamedPage(
+    return BasePage(
       name: 'Not Found',
       action: MainAction(
         label: 'Go Home',

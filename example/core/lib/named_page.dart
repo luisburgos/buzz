@@ -10,8 +10,8 @@ class MainAction {
   final Function()? onPressed;
 }
 
-class NamedPage extends StatelessWidget {
-  const NamedPage({
+class BasePage extends StatelessWidget {
+  const BasePage({
     Key? key,
     required this.name,
     this.action,

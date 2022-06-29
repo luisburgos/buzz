@@ -1,99 +1,50 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../profile.dart';
+import 'view_controller.dart';
+import 'view_template.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({
-    Key? key,
-    required this.userName,
-    required this.items,
-    required this.onItemTap,
-  }) : super(key: key);
-
-  final String userName;
-  final List<ProfileOption> items;
-  final Function(String) onItemTap;
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _ProfileHeader(userName: userName),
-        _ProfileOptionsList(
-          items: items,
-          onItemTap: onItemTap,
+    final controller = Get.put(ProfileViewController());
+
+    return Obx(() {
+      return BasePage(
+        name: 'User',
+        body: Column(
+          children: [
+            ///TODO: Change to ProfileViewList component
+            ///TODO: Add a new ProfileViewTemplate component.
+            ProfileViewTemplate(
+              userName: controller.profile.userInfo.name,
+              items: controller.profile.options,
+              onItemTap: (itemId) {
+                switch (itemId) {
+                  case 'accounts':
+                    controller.onOptionSelected();
+                    break;
+                }
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                controller.onChangeNameTapped();
+              },
+              child: const Text('Change name'),
+            ),
+          ],
         ),
-      ],
-    );
-  }
-}
-
-class _ProfileHeader extends StatelessWidget {
-  const _ProfileHeader({
-    Key? key,
-    required this.userName,
-  }) : super(key: key);
-
-  final String userName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Text(
-        userName,
-      ),
-    );
-  }
-}
-
-class _ProfileOptionsList extends StatelessWidget {
-  const _ProfileOptionsList({
-    Key? key,
-    required this.items,
-    required this.onItemTap,
-  }) : super(key: key);
-
-  final List<ProfileOption> items;
-  final Function(String) onItemTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-
-        return _ProfileOptionListTile(
-          name: item.name,
-          onTap: () {
-            onItemTap(item.id);
+        action: MainAction(
+          label: 'Go Settings',
+          onPressed: () {
+            controller.onGoToSettingsTapped();
           },
-        );
-      },
-    );
-  }
-}
-
-class _ProfileOptionListTile extends StatelessWidget {
-  const _ProfileOptionListTile({
-    Key? key,
-    required this.name,
-    required this.onTap,
-  }) : super(key: key);
-
-  final String name;
-  final Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Text(name),
-      ),
-      onTap: onTap,
-    );
+        ),
+      );
+    });
   }
 }

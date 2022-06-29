@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NamedPage(
+    return BasePage(
       name: 'Home',
       action: MainAction(
         label: 'Go Profile',

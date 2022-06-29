@@ -14,14 +14,12 @@ class ProfileModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(
           AppRoutes.profileRoot,
-          child: (context, args) => ProfilePage(
+          child: (context, args) => ProfileScreen(
             onBackToHomePressed: () {
               Modular.get<IBuzzBase>().fire(
                 NavigateBackCommand(),
               );
             },
-            profileStream:
-                Modular.get<IProfileRepository>().profileStateChanges,
           ),
         ),
       ];

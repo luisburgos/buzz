@@ -7,7 +7,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NamedPage(
+    return BasePage(
       name: 'Profile/Settings',
       action: MainAction(
         label: 'Go to the unknown',
