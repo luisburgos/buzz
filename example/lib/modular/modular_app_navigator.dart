@@ -1,4 +1,4 @@
-import 'package:buzz/navigation.dart';
+import 'package:buzz/buzz.dart' show Navigator, FeedbacksExecutor;
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ModularAppNavigator extends Navigator {

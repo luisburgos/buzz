@@ -1,4 +1,5 @@
 import 'package:buzz/buzz.dart';
+import 'package:buzz/feedbacks.dart';
 
 import 'infra/registries.dart';
 import 'utils.dart';
@@ -23,9 +24,11 @@ abstract class IBuzzBase {
   UiEventBus get uiEvents;
 
   Navigator get navigator;
+  FeedbacksExecutor get feedbacksExecutor;
 
   void init({
     required Navigator navigator,
+    FeedbacksExecutor? feedbacksExecutor,
     List<ModuleBuzzRegistries>? moduleRegistries,
   });
 
@@ -38,6 +41,9 @@ class BuzzBase implements IBuzzBase {
   Navigator get navigator => _navigator;
 
   @override
+  FeedbacksExecutor get feedbacksExecutor => _feedbacksExecutor;
+
+  @override
   AppEventBus get appEvents => EventBusHolder.of<AppEventBus>();
 
   @override
@@ -47,14 +53,17 @@ class BuzzBase implements IBuzzBase {
   UiEventBus get uiEvents => EventBusHolder.of<UiEventBus>();
 
   late Navigator _navigator;
+  late FeedbacksExecutor _feedbacksExecutor;
   List<ModuleBuzzRegistries>? _moduleRegistries;
 
   @override
   void init({
     required Navigator navigator,
+    FeedbacksExecutor? feedbacksExecutor,
     List<ModuleBuzzRegistries>? moduleRegistries,
   }) {
     _navigator = navigator;
+    _feedbacksExecutor = feedbacksExecutor ?? DefaultFeedbacksExecutor();
     _moduleRegistries = moduleRegistries;
 
     _bindNavigationCommandHandler();

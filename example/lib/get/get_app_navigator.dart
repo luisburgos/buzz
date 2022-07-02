@@ -1,4 +1,4 @@
-import 'package:buzz/navigation.dart';
+import 'package:buzz/buzz.dart';
 import 'package:get/get.dart';
 
 class GetAppNavigator extends Navigator {
@@ -21,5 +21,12 @@ class GetAppNavigator extends Navigator {
   @override
   void toNamed(String path) {
     Get.toNamed(path);
+  }
+}
+
+class GetFeedbacksExecutor extends FeedbacksExecutor {
+  @override
+  void snackBar(String title, String message) {
+    Get.snackbar(title, message);
   }
 }

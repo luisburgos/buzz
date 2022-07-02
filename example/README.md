@@ -28,6 +28,7 @@
 
 - [ ] Change Page to Screen?
 - [ ] Find a way to justify having Page -> View (ViewTemplate + StateHolder) maybe eventually Page = View + PageController where the controller can access to feature flags. 
+- [ ] How can we create sharable components between feature modules. Meaning a Component could be part of `ModulaA` but imported and included on `ModuleB` and have the same behavior out of the box. How feature flags could work at this level.
 
 ---
 From Atomic Design guides:

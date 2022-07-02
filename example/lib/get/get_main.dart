@@ -22,6 +22,7 @@ void main() {
             Buzz
               ..init(
                 navigator: GetAppNavigator(),
+                feedbacksExecutor: GetFeedbacksExecutor(),
                 moduleRegistries: [
                   ProfileModuleRegistries(
                     () => Get.find<IProfileRepository>(),
@@ -50,8 +51,6 @@ void main() {
                 NavigateBackCommand(),
               );
             },
-            //TODO: Validate stream being injected here.
-            profileStream: Get.find<IProfileRepository>().profileStateChanges,
           ),
         ),
       ],
