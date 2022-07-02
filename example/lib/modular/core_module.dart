@@ -4,9 +4,9 @@ import 'package:profile/profile.dart';
 
 import '../shared/app_routes.dart';
 import '../shared/not_found_page.dart';
-import 'home_module.dart';
-import 'modular_app_navigator.dart';
-import 'profile_module.dart';
+import 'home/home_module.dart';
+import 'overrides/app_navigator.dart';
+import 'profile/module.dart';
 
 class CoreModule extends Module {
   @override
@@ -23,13 +23,6 @@ class CoreModule extends Module {
             ),
           export: true,
         ),
-      ];
-}
-
-class ModularAppRootModule extends Module {
-  @override
-  List<Module> get imports => [
-        CoreModule(),
       ];
 
   @override

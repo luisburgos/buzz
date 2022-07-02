@@ -20,8 +20,8 @@ class ProfileView extends StatelessWidget {
             ///TODO: Change to ProfileViewList component
             ///TODO: Add a new ProfileViewTemplate component.
             ProfileViewTemplate(
-              userName: controller.profile.userInfo.name,
-              items: controller.profile.options,
+              userName: controller.profile.value.userInfo.name,
+              items: controller.profile.value.options,
               onItemTap: (itemId) {
                 switch (itemId) {
                   case 'accounts':

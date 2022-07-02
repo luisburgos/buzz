@@ -6,8 +6,8 @@ import '../model/profile.dart';
 import 'ui_event.dart';
 
 class ProfileViewController extends GetxController {
-  Profile get profile =>
-      Get.find<IProfileRepository>().currentProfile ?? Profile.empty();
+  Rx<Profile> get profile =>
+      Get.find<IProfileRepository>().currentProfile?.obs ?? Profile.empty().obs;
 
   bool get isLoading => Get.find<IProfileRepository>().isLoading;
 

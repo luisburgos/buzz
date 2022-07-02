@@ -2,7 +2,7 @@ import 'package:buzz/buzz.dart';
 import 'package:example/shared/modules/home/home_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../shared/app_routes.dart';
+import '../../shared/app_routes.dart';
 
 class HomeModule extends Module {
   @override

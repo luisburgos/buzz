@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../bootstrap.dart';
-import 'modules.dart';
+import 'core_module.dart';
 
 void main() {
   return bootstrap(
     ModularApp(
-      module: ModularAppRootModule(),
+      module: CoreModule(),
       child: const ModularAppWidget(),
     ),
   );
