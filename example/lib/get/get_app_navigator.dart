@@ -23,10 +23,3 @@ class GetAppNavigator extends Navigator {
     Get.toNamed(path);
   }
 }
-
-class GetFeedbacksExecutor extends FeedbacksExecutor {
-  @override
-  void snackBar(String title, String message) {
-    Get.snackbar(title, message);
-  }
-}
