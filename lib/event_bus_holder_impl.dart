@@ -4,7 +4,9 @@ import 'package:buzz/utils.dart';
 import 'infra/event_bus_holder.dart';
 
 class EventBusHolderImpl implements IEventBusHolder {
-  final _allStreamBuses = <dynamic, TypedEventBus>{};
+  final _allStreamBuses = <Type, TypedEventBus>{};
+
+  int get totalBuses => _allStreamBuses.length;
 
   @override
   void destroy() {
@@ -16,7 +18,8 @@ class EventBusHolderImpl implements IEventBusHolder {
     TypedEventBus? eventBus;
 
     for (var value in _allStreamBuses.values) {
-      bool isSupported = value.isTypeSupported(type);
+      print('$value - $type - ${type.runtimeType}');
+      bool isSupported = value.isTypeSupported(type.runtimeType);
       if (isSupported) {
         eventBus = value;
       }
@@ -38,6 +41,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     TypedEventBus? eventBus;
 
     for (var entry in _allStreamBuses.entries) {
+      print('$entry - ${entry.key} looking for $X');
       if (entry.key == X) {
         eventBus = entry.value;
       }
@@ -57,9 +61,8 @@ class EventBusHolderImpl implements IEventBusHolder {
   @override
   void addEventBus<X>(TypedEventBus<X> streamBus) {
     final typeModule = streamBus.runtimeType;
-    if (!_allStreamBuses.containsKey(typeModule)) {
-      _allStreamBuses[typeModule] = streamBus;
-      buzzLog('INITIALIZED $typeModule');
-    }
+    if (_allStreamBuses.containsKey(typeModule)) return;
+    _allStreamBuses[typeModule] = streamBus;
+    buzzLog('INITIALIZED $typeModule');
   }
 }

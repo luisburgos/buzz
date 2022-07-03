@@ -3,12 +3,21 @@ import 'package:event_bus/event_bus.dart';
 
 import '../utils.dart';
 
-class TypedEventBus<T> {
+bool isSubtype<S, T>(S s, T t) {
+  print('$s is $t? => ${s is T}');
+  return s is T;
+}
+
+abstract class TypedEventBus<T> {
   final _eventBus = EventBus();
 
-  bool isTypeSupported(Object type) {
-    throw UnimplementedError();
+  bool isTypeSupported(dynamic type) {
+    final isSupported = isSubtype(type, T);
+    print('$runtimeType: $type isSubtype $T = $isSupported');
+    return isSupported;
   }
+
+  dynamic get supportedType => T;
 
   void fire(T event) {
     buzzLog('$runtimeType - $event');
@@ -21,12 +30,10 @@ class TypedEventBus<T> {
 
   Stream<X> of<X extends T>(dynamic type) {
     return _eventBus.streamController.stream
-        .where((e) => isTypeSupported(e))
+        .where((e) => isTypeSupported(type))
         .cast<X>();
   }
-}
 
-extension TypedEventBusRegistry<T> on TypedEventBus<T> {
   void bindRegistries(List<EventHandlerRegistry<T>> registries) {
     registries.forEach((registry) {
       bindRegistry(registry);
@@ -43,8 +50,4 @@ extension TypedEventBusRegistry<T> on TypedEventBus<T> {
       },
     );
   }
-}
-
-abstract class TypedEventHandler<T> {
-  void handle(T event);
 }

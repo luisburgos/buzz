@@ -1,12 +1,12 @@
 import 'package:buzz/buzz.dart';
 
-abstract class _IModuleBuzzRegistries {
+abstract class IModuleBuzzRegistries {
   List<CommandRegistry> get commands;
   List<UiEventRegistry> get uiEvents;
   List<AppEventRegistry> get appEvents;
 }
 
-abstract class ModuleBuzzRegistries extends _IModuleBuzzRegistries {
+abstract class ModuleBuzzRegistries extends IModuleBuzzRegistries {
   @override
   List<CommandRegistry> get commands => const [];
 
@@ -41,7 +41,6 @@ abstract class EventHandlerRegistry<T> {
   });
 
   final Function(T) handler;
-
   dynamic get registryType => T;
 
   @override

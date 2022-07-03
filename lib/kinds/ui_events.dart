@@ -1,6 +1,5 @@
-import 'package:buzz/utils.dart';
-
 import '../infra/typed_event_bus.dart';
+import '../infra/typed_event_handler.dart';
 
 abstract class UiEvent {}
 
@@ -8,13 +7,7 @@ abstract class UIEventHandler extends TypedEventHandler<UiEvent> {
   void handle(UiEvent uiEvent);
 }
 
-class UiEventBus extends TypedEventBus<UiEvent> {
-  @override
-  bool isTypeSupported(dynamic type) {
-    buzzLog('UiEventBus: $type - ${type is UiEvent}');
-    return type is UiEvent;
-  }
-}
+class UiEventBus extends TypedEventBus<UiEvent> {}
 
 class OnTapped extends UiEvent {}
 

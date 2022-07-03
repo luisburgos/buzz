@@ -71,7 +71,7 @@ class BuzzBase implements IBuzzBase {
   }
 
   @override
-  void fire(event) {
+  void fire(dynamic event) {
     try {
       EventBusHolder.forKind(event).fire(event);
     } catch (e) {
