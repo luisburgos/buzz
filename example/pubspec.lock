@@ -22,6 +22,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  buzz_ui:
+    dependency: transitive
+    description:
+      path: buzz_ui
+      relative: true
+    source: path
+    version: "0.0.1"
   characters:
     dependency: transitive
     description:
@@ -53,7 +60,7 @@ packages:
   core:
     dependency: "direct main"
     description:
-      path: core
+      path: "../packages/core"
       relative: true
     source: path
     version: "0.0.1"

@@ -6,12 +6,12 @@ import '../utils.dart';
 class TypedEventBus<T> {
   final _eventBus = EventBus();
 
-  bool isTypeSupported(dynamic type) {
+  bool isTypeSupported(Object type) {
     throw UnimplementedError();
   }
 
   void fire(T event) {
-    developerLog('$runtimeType - $event');
+    buzzLog('$runtimeType - $event');
     _eventBus.fire(event);
   }
 
@@ -19,14 +19,10 @@ class TypedEventBus<T> {
     return _eventBus.on<X>();
   }
 
-  Stream of(dynamic type) {
-    return _eventBus.streamController.stream.where(
-      (event) {
-        final isType = isTypeSupported(type);
-        developerLog('$event isType: $isType');
-        return isType;
-      },
-    ).cast();
+  Stream<X> of<X extends T>(dynamic type) {
+    return _eventBus.streamController.stream
+        .where((e) => isTypeSupported(e))
+        .cast<X>();
   }
 }
 
@@ -38,8 +34,13 @@ extension TypedEventBusRegistry<T> on TypedEventBus<T> {
   }
 
   void bindRegistry(EventHandlerRegistry<T> registry) {
-    of(registry.registryType).listen(
-      (event) => registry.handler(event),
+    final stream = of<T>(registry.registryType);
+    buzzLog('bindRegistry: $T - registry: ${registry}');
+    buzzLog('bindRegistry: $T - stream: ${stream.toString()}');
+    stream.listen(
+      (event) {
+        registry.handler(event);
+      },
     );
   }
 }

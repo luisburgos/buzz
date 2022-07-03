@@ -35,7 +35,7 @@ dependencies:
   profile:
     path: './profile'
   core:
-    path: './core'
+    path: '../packages/core'
   buzz:
     path: '../'
 

@@ -45,5 +45,5 @@ abstract class EventHandlerRegistry<T> {
   dynamic get registryType => T;
 
   @override
-  String toString() => '$runtimeType type:$T';
+  String toString() => '$runtimeType type: $T handler: $handler';
 }

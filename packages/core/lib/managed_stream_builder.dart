@@ -1,9 +1,4 @@
-import 'package:buzz/utils.dart';
 import 'package:flutter/material.dart';
-
-void profileLog(String message) {
-  buzzLog(message, name: 'PROFILE');
-}
 
 typedef OnData<T> = Widget Function(T data);
 typedef OnError = Widget Function(dynamic e);

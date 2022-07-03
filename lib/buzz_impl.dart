@@ -75,7 +75,7 @@ class BuzzBase implements IBuzzBase {
     try {
       EventBusHolder.forKind(event).fire(event);
     } catch (e) {
-      developerLog('$runtimeType $e');
+      buzzLog('$runtimeType $e');
     }
   }
 

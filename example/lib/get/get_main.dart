@@ -9,6 +9,7 @@ void main() {
   return bootstrap(
     GetMaterialApp(
       title: 'Get App Test',
+      debugShowCheckedModeBanner: false,
       unknownRoute: GetPage(
         name: AppRoutes.notFound,
         page: () => const NotFoundPage(),

@@ -15,6 +15,9 @@ class ProfileView extends StatelessWidget {
     return Obx(() {
       return BasePage(
         name: 'User',
+        onSettingsPressed: () {
+          controller.onGoToSettingsTapped();
+        },
         body: Column(
           children: [
             ///TODO: Change to ProfileViewList component

@@ -1,6 +1,9 @@
 import 'package:buzz/buzz.dart';
 import 'package:buzz/utils.dart';
 
+import '../commands/change_user_name_command.dart';
+import '../routes.dart';
+
 //TODO: Evaluate and remove hierarchy with better example
 abstract class OnTappedProfiledUiEvent extends OnTapped {}
 
@@ -14,24 +17,20 @@ class GlobalProfileUiEventHandler
     extends TypedEventHandler<OnTappedProfiledUiEvent> {
   @override
   void handle(OnTappedProfiledUiEvent event) {
-    developerLog(event.toString());
+    buzzLog('$runtimeType - ${event.toString()}');
     if (event is OnChangeNameTapped) {
-      /*FindCommandStream().fire(
+      Buzz.fire(
         ChangeUserNameCommand(newName: 'New name!'),
-      );*/
+      );
       return;
     }
     if (event is OnGoToSettingsTapped) {
-      /*FindCommandStream().fire(
-        NavigateToCommand.named(ProfileRoutes.userSettings),
+      Buzz.fire(
+        NavigateToCommand.named(ProfileRoutes.settings),
       );
-      return;
-      */
     }
     if (event is OnOptionSelected) {
-      /*FindCommandStream().fire(
-        NavigateToCommand.named(ProfileRoutes.userAccounts),
-      );*/
+      //TODO: Buzz.fire(NavigateToCommand.named(''));
     }
   }
 }

@@ -40,6 +40,6 @@ class OnShowedSnackBarEvent extends AppEvent {}
 class DefaultFeedbacksExecutor extends FeedbacksExecutor {
   @override
   void snackBar(String title, String message) {
-    developerLog('$title:$message');
+    buzzLog('$title:$message');
   }
 }

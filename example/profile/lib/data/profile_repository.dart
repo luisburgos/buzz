@@ -1,6 +1,7 @@
+import 'package:core/in_memory_store.dart';
+
 import '../model/profile.dart';
 import '../model/profile_user_info.dart';
-import 'in_memory_store.dart';
 
 abstract class IProfileRepositoryOperations {
   Future<UpdatedUserName> changeUserName(String newName);

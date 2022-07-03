@@ -55,11 +55,11 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  void addEventBus(TypedEventBus streamBus) {
+  void addEventBus<X>(TypedEventBus<X> streamBus) {
     final typeModule = streamBus.runtimeType;
     if (!_allStreamBuses.containsKey(typeModule)) {
       _allStreamBuses[typeModule] = streamBus;
-      developerLog('INITIALIZED $typeModule');
+      buzzLog('INITIALIZED $typeModule');
     }
   }
 }
