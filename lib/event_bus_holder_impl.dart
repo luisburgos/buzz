@@ -14,12 +14,12 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  TypedEventBus forKind(dynamic type) {
+  TypedEventBus ofType<T extends SupportedTyped>() {
     TypedEventBus? eventBus;
 
     for (var value in _allStreamBuses.values) {
-      print('$value - $type - ${type.runtimeType}');
-      bool isSupported = value.isTypeSupported(type.runtimeType);
+      print('$value - $T - ${T.runtimeType}');
+      bool isSupported = value.isTypeSupported<T>();
       if (isSupported) {
         eventBus = value;
       }
@@ -32,7 +32,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     if (eventBus != null) {
       return eventBus;
     } else {
-      throw BusNotFound(type.toString());
+      throw BusNotFound(T.toString());
     }
   }
 
@@ -52,6 +52,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     }
 
     if (eventBus != null) {
+      print('Bus of $X found');
       return eventBus as X;
     } else {
       throw BusNotFound(X.toString());
@@ -59,7 +60,7 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  void addEventBus<X>(TypedEventBus<X> streamBus) {
+  void addEventBus<X extends SupportedTyped>(TypedEventBus<X> streamBus) {
     final typeModule = streamBus.runtimeType;
     if (_allStreamBuses.containsKey(typeModule)) return;
     _allStreamBuses[typeModule] = streamBus;

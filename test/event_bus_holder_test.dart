@@ -2,7 +2,7 @@ import 'package:buzz/buzz.dart';
 import 'package:buzz/event_bus_holder_impl.dart';
 import 'package:test/test.dart';
 
-class BaseAppEvent extends AppEvent {}
+import 'helpers/test_events.dart';
 
 void main() {
   test('', () {
@@ -21,7 +21,7 @@ void main() {
   test('', () {
     final eventBusHolder = EventBusHolderImpl();
     expect(
-      () => eventBusHolder.forKind(AppEventBus),
+      () => eventBusHolder.ofType<BaseAppEvent>(),
       throwsA(isA<BusNotFound>()),
     );
   });
@@ -30,7 +30,7 @@ void main() {
     final eventBusHolder = EventBusHolderImpl()..addEventBus(AppEventBus());
 
     expect(
-      eventBusHolder.forKind(BaseAppEvent),
+      eventBusHolder.ofType<BaseAppEvent>(),
       isA<AppEventBus>(),
     );
   });

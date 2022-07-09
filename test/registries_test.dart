@@ -1,7 +1,7 @@
 import 'package:buzz/buzz.dart';
 import 'package:test/test.dart';
 
-class BaseAppEvent extends AppEvent {}
+import 'helpers/test_events.dart';
 
 void main() {
   test('AppEventRegistry.registryType works for base class', () {

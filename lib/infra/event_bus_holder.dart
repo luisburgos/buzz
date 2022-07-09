@@ -21,9 +21,9 @@ void cleanEventBusHolder() {
 
 abstract class IEventBusHolder {
   X of<X extends TypedEventBus>();
-  TypedEventBus forKind(dynamic type);
-  void addEventBus<X>(TypedEventBus<X> eventBus);
+  void addEventBus<X extends SupportedTyped>(TypedEventBus<X> eventBus);
   void destroy();
+  TypedEventBus ofType<T extends SupportedTyped>();
 }
 
 class BusNotFound extends BuzzError {

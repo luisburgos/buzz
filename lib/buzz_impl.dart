@@ -32,7 +32,7 @@ abstract class IBuzzBase {
     List<ModuleBuzzRegistries>? moduleRegistries,
   });
 
-  void fire(dynamic event);
+  void fire<X extends SupportedTyped>(X event);
   void destroy();
 }
 
@@ -71,9 +71,10 @@ class BuzzBase implements IBuzzBase {
   }
 
   @override
-  void fire(dynamic event) {
+  void fire<X extends SupportedTyped>(X event) {
+    print('fire $event');
     try {
-      EventBusHolder.forKind(event).fire(event);
+      EventBusHolder.ofType<X>().fire(event);
     } catch (e) {
       buzzLog('$runtimeType $e');
     }

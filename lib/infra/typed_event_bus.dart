@@ -1,25 +1,23 @@
 import 'package:buzz/buzz.dart';
+import 'package:buzz/utils/subtype_checker.dart';
 import 'package:event_bus/event_bus.dart';
 
 import '../utils.dart';
 
-bool isSubtype<S, T>(S s, T t) {
-  print('$s is $t? => ${s is T}');
-  return s is T;
-}
+abstract class SupportedTyped {}
 
-abstract class TypedEventBus<T> {
+abstract class TypedEventBus<T extends SupportedTyped> {
   final _eventBus = EventBus();
 
-  bool isTypeSupported(dynamic type) {
-    final isSupported = isSubtype(type, T);
-    print('$runtimeType: $type isSubtype $T = $isSupported');
+  bool isTypeSupported<X>() {
+    final isSupported = SubtypeChecker<X, T>().isValid();
+    print('$runtimeType: $X isSupported $T = $isSupported');
     return isSupported;
   }
 
   dynamic get supportedType => T;
 
-  void fire(T event) {
+  void fire<X extends T>(X event) {
     buzzLog('$runtimeType - $event');
     _eventBus.fire(event);
   }
@@ -28,11 +26,12 @@ abstract class TypedEventBus<T> {
     return _eventBus.on<X>();
   }
 
+  /*
   Stream<X> of<X extends T>(dynamic type) {
     return _eventBus.streamController.stream
         .where((e) => isTypeSupported(type))
         .cast<X>();
-  }
+  }*/
 
   void bindRegistries(List<EventHandlerRegistry<T>> registries) {
     registries.forEach((registry) {
@@ -41,7 +40,7 @@ abstract class TypedEventBus<T> {
   }
 
   void bindRegistry(EventHandlerRegistry<T> registry) {
-    final stream = of<T>(registry.registryType);
+    final stream = on<T>();
     buzzLog('bindRegistry: $T - registry: ${registry}');
     buzzLog('bindRegistry: $T - stream: ${stream.toString()}');
     stream.listen(
