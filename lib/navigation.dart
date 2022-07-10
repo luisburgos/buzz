@@ -65,6 +65,7 @@ class NavigationCommandHandler extends TypedEventHandler<NavigationCommand> {
   final Navigator navigator;
 
   @override
+  //ignore: avoid_renaming_method_parameters
   void handle(NavigationCommand command) {
     if (command is NavigateBackCommand) {
       if (_canPop()) {

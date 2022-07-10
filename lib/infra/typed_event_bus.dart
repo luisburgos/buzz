@@ -32,14 +32,14 @@ abstract class TypedEventBus<T> {
   }*/
 
   void bindRegistries(List<EventHandlerRegistry<T>> registries) {
-    registries.forEach((registry) {
+    for (var registry in registries) {
       bindRegistry(registry);
-    });
+    }
   }
 
   void bindRegistry(EventHandlerRegistry<T> registry) {
     final stream = on<T>();
-    buzzLog('bindRegistry: $T - registry: ${registry}');
+    buzzLog('bindRegistry: $T - registry: $registry');
     buzzLog('bindRegistry: $T - stream: ${stream.toString()}');
     stream.listen(
       (event) {

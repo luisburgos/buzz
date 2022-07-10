@@ -1,7 +1,6 @@
 import 'package:buzz/buzz.dart';
-import 'package:buzz/feedbacks.dart';
 
-import 'infra/registries.dart';
+import 'infra/errors.dart';
 
 IBuzzBase? _buzz;
 
@@ -103,8 +102,4 @@ class BuzzBase implements IBuzzBase {
       appEvents.bindRegistries(moduleRegistry.appEvents);
     });
   }
-}
-
-class UnsupportedBuzzMessage extends BuzzError {
-  UnsupportedBuzzMessage(dynamic message) : super('$message is not supported');
 }

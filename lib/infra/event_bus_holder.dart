@@ -6,6 +6,7 @@ import 'typed_event_bus.dart';
 
 IEventBusHolder? _eventBusHolder;
 
+//ignore: non_constant_identifier_names
 IEventBusHolder get EventBusHolder {
   _eventBusHolder ??= EventBusHolderImpl()
     ..addEventBus(AppEventBus())
@@ -24,21 +25,4 @@ abstract class IEventBusHolder {
   void addEventBus<X>(TypedEventBus<X> eventBus);
   void destroy();
   TypedEventBus forType<T>();
-}
-
-class BusNotFound extends BuzzError {
-  BusNotFound(String message) : super(message);
-}
-
-abstract class BuzzError implements Exception {
-  final String message;
-  final StackTrace? stackTrace;
-
-  const BuzzError(this.message, [this.stackTrace]);
-
-  String _returnStackTrace() =>
-      stackTrace != null ? '\n${stackTrace.toString()}' : '';
-
-  @override
-  String toString() => '$runtimeType: $message${_returnStackTrace()}';
 }

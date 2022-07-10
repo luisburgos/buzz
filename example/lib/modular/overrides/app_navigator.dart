@@ -1,3 +1,4 @@
+// ignore: unused_shown_name
 import 'package:buzz/buzz.dart' show Navigator, FeedbacksExecutor;
 import 'package:flutter_modular/flutter_modular.dart';
 

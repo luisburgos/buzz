@@ -1,6 +1,7 @@
 import 'package:buzz/infra/typed_event_bus.dart';
 import 'package:buzz/utils.dart';
 
+import 'infra/errors.dart';
 import 'infra/event_bus_holder.dart';
 
 class EventBusHolderImpl implements IEventBusHolder {
@@ -18,7 +19,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     TypedEventBus? eventBus;
 
     for (var bus in _allStreamBuses.values) {
-      print('\n$bus - ${T}');
+      print('\n$bus - $T');
       bool isSupported = bus.isTypeSupported<T>();
       if (isSupported) {
         eventBus = bus;
@@ -32,7 +33,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     if (eventBus != null) {
       return eventBus;
     } else {
-      throw BusNotFound(T.toString());
+      throw BuzzChannelNotFound(T.toString());
     }
   }
 
@@ -55,7 +56,7 @@ class EventBusHolderImpl implements IEventBusHolder {
       print('Bus of $X found');
       return eventBus as X;
     } else {
-      throw BusNotFound(X.toString());
+      throw BuzzChannelNotFound(X.toString());
     }
   }
 

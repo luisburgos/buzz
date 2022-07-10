@@ -25,6 +25,7 @@ class FeedbacksCommandHandler extends TypedEventHandler<FeedbacksCommand> {
   final FeedbacksExecutor feedbacksExecutor;
 
   @override
+  //ignore: avoid_renaming_method_parameters
   void handle(FeedbacksCommand command) {
     if (command is ShowSnackBarCommand) {
       feedbacksExecutor.snackBar(command.title, command.message);

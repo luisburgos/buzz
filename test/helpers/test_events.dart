@@ -66,8 +66,8 @@ void buzzTest(
     }
 
     //When
-    fire().forEach((element) {
+    for (var element in fire()) {
       Buzz.fire(element);
-    });
+    }
   });
 }
