@@ -1,7 +1,7 @@
 import '../infra/typed_event_bus.dart';
 import '../infra/typed_event_handler.dart';
 
-abstract class UiEvent implements SupportedTyped {}
+abstract class UiEvent {}
 
 abstract class UIEventHandler extends TypedEventHandler<UiEvent> {
   void handle(UiEvent uiEvent);

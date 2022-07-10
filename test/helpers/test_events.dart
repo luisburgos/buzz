@@ -1,7 +1,4 @@
 import 'package:buzz/buzz.dart';
-import 'package:buzz/infra/typed_event_handler.dart';
-import 'package:buzz/kinds/app_events.dart';
-import 'package:buzz/kinds/ui_events.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -38,7 +35,7 @@ void buzzTest(
   List<TypeMatcher<UiEvent>> Function()? expectUiEvents,
   List<TypeMatcher<AppEvent>> Function()? expectAppEvents,
   List<TypeMatcher<Command>> Function()? expectCommands,
-  required List<SupportedTyped> Function() fire,
+  required List Function() fire,
 }) {
   test(message, () {
     /// TODO: Allow customization.

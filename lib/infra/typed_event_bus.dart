@@ -4,8 +4,6 @@ import 'package:event_bus/event_bus.dart';
 
 import '../utils.dart';
 
-abstract class SupportedTyped {}
-
 abstract class TypedEventBus<T> {
   final _eventBus = EventBus();
 
