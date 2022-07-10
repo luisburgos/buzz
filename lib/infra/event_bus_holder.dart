@@ -22,7 +22,7 @@ void cleanEventBusHolder() {
 
 abstract class IEventBusHolder {
   X of<X extends TypedEventBus>();
-  void addEventBus<X>(TypedEventBus<X> eventBus);
+  void addEventBus(TypedEventBus eventBus);
   void destroy();
   TypedEventBus forType<T>();
 }

@@ -61,7 +61,7 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  void addEventBus<X>(TypedEventBus<X> streamBus) {
+  void addEventBus(TypedEventBus streamBus) {
     final typeModule = streamBus.runtimeType;
     if (_allStreamBuses.containsKey(typeModule)) return;
     _allStreamBuses[typeModule] = streamBus;

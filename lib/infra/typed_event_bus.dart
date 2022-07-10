@@ -9,7 +9,7 @@ abstract class TypedEventBus<T> {
 
   bool isTypeSupported<X>() {
     final isSupported = SubtypeChecker<X, T>().isValid();
-    print('$runtimeType: $X isSupported $T = $isSupported');
+    print('At $runtimeType, $X isSupported: $isSupported');
     return isSupported;
   }
 
@@ -24,13 +24,6 @@ abstract class TypedEventBus<T> {
     return _eventBus.on<X>();
   }
 
-  /*
-  Stream<X> of<X extends T>(dynamic type) {
-    return _eventBus.streamController.stream
-        .where((e) => isTypeSupported(type))
-        .cast<X>();
-  }*/
-
   void bindRegistries(List<EventHandlerRegistry<T>> registries) {
     for (var registry in registries) {
       bindRegistry(registry);
@@ -39,8 +32,6 @@ abstract class TypedEventBus<T> {
 
   void bindRegistry(EventHandlerRegistry<T> registry) {
     final stream = on<T>();
-    buzzLog('bindRegistry: $T - registry: $registry');
-    buzzLog('bindRegistry: $T - stream: ${stream.toString()}');
     stream.listen(
       (event) {
         registry.handler(event);
