@@ -17,6 +17,10 @@ class UiEvent1 extends UiEvent {}
 
 class UiEvent2 extends UiEvent {}
 
+class Command1 extends Command {}
+
+class Command2 extends Command {}
+
 class NotAUiEvent {}
 
 //TODO: Verify remove
@@ -31,9 +35,9 @@ class MockNavigator extends Mock implements Navigator {}
 
 void buzzTest(
   String message, {
-  List<TypeMatcher> Function()? expectUiEvents,
-  List<TypeMatcher> Function()? expectAppEvents,
-  List<TypeMatcher> Function()? expectCommands,
+  List<TypeMatcher<UiEvent>> Function()? expectUiEvents,
+  List<TypeMatcher<AppEvent>> Function()? expectAppEvents,
+  List<TypeMatcher<Command>> Function()? expectCommands,
   required List<SupportedTyped> Function() fire,
 }) {
   test(message, () {
