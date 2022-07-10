@@ -19,7 +19,6 @@ class EventBusHolderImpl implements IEventBusHolder {
     TypedEventBus? eventBus;
 
     for (var bus in _allStreamBuses.values) {
-      print('\n$bus - $T');
       bool isSupported = bus.isTypeSupported<T>();
       if (isSupported) {
         eventBus = bus;
@@ -42,7 +41,6 @@ class EventBusHolderImpl implements IEventBusHolder {
     TypedEventBus? eventBus;
 
     for (var entry in _allStreamBuses.entries) {
-      print('$entry - ${entry.key} looking for $X');
       if (entry.key == X) {
         eventBus = entry.value;
       }
@@ -53,7 +51,6 @@ class EventBusHolderImpl implements IEventBusHolder {
     }
 
     if (eventBus != null) {
-      print('Bus of $X found');
       return eventBus as X;
     } else {
       throw BuzzChannelNotFound(X.toString());
