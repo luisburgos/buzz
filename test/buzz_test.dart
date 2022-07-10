@@ -1,40 +1,33 @@
-import 'package:buzz/buzz.dart';
-import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'helpers/test_events.dart';
 
-class MockNavigator extends Mock implements Navigator {}
-
 void main() {
-  test('Buzz emits AppEvents and UiEvents', () {
-    //Given
-    Buzz.init(
-      navigator: MockNavigator(),
-    );
+  buzzTest(
+    'Buzz emits only one AppEvent',
+    expectAppEvents: () => [
+      isA<AppEvent1>(),
+    ],
+    fire: () => [
+      AppEvent1(),
+    ],
+  );
 
-    //Then
-    expectLater(
-      Buzz.appEvents.on(),
-      emitsInAnyOrder([
-        isA<AppEvent1>(),
-        isA<AppEvent2>(),
-      ]),
-    );
-
-    expectLater(
-      Buzz.uiEvents.on(),
-      emitsInAnyOrder([
-        isA<UiEvent1>(),
-        isA<UiEvent2>(),
-      ]),
-    );
-
-    //When
-    Buzz
-      ..fire(AppEvent1())
-      ..fire(UiEvent1())
-      ..fire(AppEvent2())
-      ..fire(UiEvent2());
-  });
+  buzzTest(
+    'Buzz alternately  emits two AppEvents and two UiEvents',
+    expectAppEvents: () => [
+      isA<AppEvent1>(),
+      isA<AppEvent2>(),
+    ],
+    expectUiEvents: () => [
+      isA<UiEvent1>(),
+      isA<UiEvent2>(),
+    ],
+    fire: () => [
+      UiEvent1(),
+      AppEvent1(),
+      UiEvent2(),
+      AppEvent2(),
+    ],
+  );
 }

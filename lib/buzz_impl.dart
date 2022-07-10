@@ -2,7 +2,6 @@ import 'package:buzz/buzz.dart';
 import 'package:buzz/feedbacks.dart';
 
 import 'infra/registries.dart';
-import 'utils.dart';
 
 IBuzzBase? _buzz;
 
@@ -32,7 +31,7 @@ abstract class IBuzzBase {
     List<ModuleBuzzRegistries>? moduleRegistries,
   });
 
-  void fire<X extends SupportedTyped>(X event);
+  void fire(dynamic message);
   void destroy();
 }
 
@@ -71,12 +70,15 @@ class BuzzBase implements IBuzzBase {
   }
 
   @override
-  void fire<X extends SupportedTyped>(X event) {
-    print('fire $event');
-    try {
-      EventBusHolder.ofType<X>().fire(event);
-    } catch (e) {
-      buzzLog('$runtimeType $e');
+  void fire(dynamic message) {
+    if (message is UiEvent) {
+      uiEvents.fire(message);
+    } else if (message is AppEvent) {
+      appEvents.fire(message);
+    } else if (message is Command) {
+      commands.fire(message);
+    } else {
+      throw UnsupportedBuzzMessage(message);
     }
   }
 
@@ -101,4 +103,8 @@ class BuzzBase implements IBuzzBase {
       appEvents.bindRegistries(moduleRegistry.appEvents);
     });
   }
+}
+
+class UnsupportedBuzzMessage extends BuzzError {
+  UnsupportedBuzzMessage(dynamic message) : super('$message is not supported');
 }

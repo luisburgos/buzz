@@ -23,7 +23,7 @@ abstract class IEventBusHolder {
   X of<X extends TypedEventBus>();
   void addEventBus<X extends SupportedTyped>(TypedEventBus<X> eventBus);
   void destroy();
-  TypedEventBus ofType<T extends SupportedTyped>();
+  TypedEventBus forType<T>();
 }
 
 class BusNotFound extends BuzzError {

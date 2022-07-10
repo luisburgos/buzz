@@ -6,7 +6,7 @@ import '../utils.dart';
 
 abstract class SupportedTyped {}
 
-abstract class TypedEventBus<T extends SupportedTyped> {
+abstract class TypedEventBus<T> {
   final _eventBus = EventBus();
 
   bool isTypeSupported<X>() {
@@ -17,7 +17,7 @@ abstract class TypedEventBus<T extends SupportedTyped> {
 
   dynamic get supportedType => T;
 
-  void fire<X extends T>(X event) {
+  void fire(T event) {
     buzzLog('$runtimeType - $event');
     _eventBus.fire(event);
   }

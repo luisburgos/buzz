@@ -21,7 +21,7 @@ void main() {
   test('', () {
     final eventBusHolder = EventBusHolderImpl();
     expect(
-      () => eventBusHolder.ofType<BaseAppEvent>(),
+      () => eventBusHolder.forType<BaseAppEvent>(),
       throwsA(isA<BusNotFound>()),
     );
   });
@@ -30,7 +30,7 @@ void main() {
     final eventBusHolder = EventBusHolderImpl()..addEventBus(AppEventBus());
 
     expect(
-      eventBusHolder.ofType<BaseAppEvent>(),
+      eventBusHolder.forType<BaseAppEvent>(),
       isA<AppEventBus>(),
     );
   });

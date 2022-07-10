@@ -14,14 +14,14 @@ class EventBusHolderImpl implements IEventBusHolder {
   }
 
   @override
-  TypedEventBus ofType<T extends SupportedTyped>() {
+  TypedEventBus forType<T>() {
     TypedEventBus? eventBus;
 
-    for (var value in _allStreamBuses.values) {
-      print('$value - $T - ${T.runtimeType}');
-      bool isSupported = value.isTypeSupported<T>();
+    for (var bus in _allStreamBuses.values) {
+      print('\n$bus - ${T}');
+      bool isSupported = bus.isTypeSupported<T>();
       if (isSupported) {
-        eventBus = value;
+        eventBus = bus;
       }
 
       if (eventBus != null) {
