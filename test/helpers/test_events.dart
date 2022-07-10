@@ -30,6 +30,12 @@ class UiEventHandler extends Mock implements TypedEventHandler<UiEvent> {
 
 class MockNavigator extends Mock implements Navigator {}
 
+void initDefaultTestBuzz() {
+  Buzz.init(
+    navigator: MockNavigator(),
+  );
+}
+
 void buzzTest(
   String message, {
   List<TypeMatcher<UiEvent>> Function()? expectUiEvents,
@@ -40,9 +46,7 @@ void buzzTest(
   test(message, () {
     /// TODO: Allow customization.
     /// Default
-    Buzz.init(
-      navigator: MockNavigator(),
-    );
+    initDefaultTestBuzz();
 
     if (expectUiEvents != null) {
       expectLater(

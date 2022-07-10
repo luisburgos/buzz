@@ -1,8 +1,21 @@
+import 'package:buzz/buzz.dart';
 import 'package:test/test.dart';
 
 import 'helpers/test_events.dart';
 
 void main() {
+  group('Buzz interface', () {
+    test('Buzz.cleanBuzz rebuilds instance when calling again', () {
+      initDefaultTestBuzz();
+      final initialHashCode = Buzz.hashCode;
+
+      expect(Buzz, isNotNull);
+      cleanBuzz();
+      expect(Buzz, isNotNull);
+      expect(Buzz.hashCode == initialHashCode, false);
+    });
+  });
+
   group('Only one emit per supported type', () {
     buzzTest(
       'Buzz emits only one UiEvent',
