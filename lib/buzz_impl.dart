@@ -1,7 +1,5 @@
 import 'package:buzz/buzz.dart';
 
-import 'infra/errors.dart';
-
 IBuzzBase? _buzz;
 
 /// Instance of Modular for search binds and route.

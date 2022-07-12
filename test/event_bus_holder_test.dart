@@ -1,6 +1,5 @@
 import 'package:buzz/buzz.dart';
 import 'package:buzz/event_bus_holder_impl.dart';
-import 'package:buzz/infra/errors.dart';
 import 'package:test/test.dart';
 
 import 'fixtures/app_events.dart';
