@@ -1,6 +1,17 @@
 import 'package:buzz/buzz.dart';
 import 'package:buzz/utils.dart';
 
+abstract class FeedbacksExecutor {
+  void snackBar(String title, String message);
+}
+
+class DefaultFeedbacksExecutor extends FeedbacksExecutor {
+  @override
+  void snackBar(String title, String message) {
+    buzzLog('$title:$message');
+  }
+}
+
 abstract class FeedbacksCommand extends Command {}
 
 class ShowSnackBarCommand extends FeedbacksCommand {
@@ -11,10 +22,6 @@ class ShowSnackBarCommand extends FeedbacksCommand {
 
   final String title;
   final String message;
-}
-
-abstract class FeedbacksExecutor {
-  void snackBar(String title, String message);
 }
 
 class FeedbacksCommandHandler extends TypedEventHandler<FeedbacksCommand> {
@@ -37,10 +44,3 @@ class FeedbacksCommandHandler extends TypedEventHandler<FeedbacksCommand> {
 }
 
 class OnShowedSnackBarEvent extends AppEvent {}
-
-class DefaultFeedbacksExecutor extends FeedbacksExecutor {
-  @override
-  void snackBar(String title, String message) {
-    buzzLog('$title:$message');
-  }
-}
