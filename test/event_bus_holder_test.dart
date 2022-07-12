@@ -3,7 +3,7 @@ import 'package:buzz/event_bus_holder_impl.dart';
 import 'package:buzz/infra/errors.dart';
 import 'package:test/test.dart';
 
-import 'helpers/test_events.dart';
+import 'fixtures/app_events.dart';
 
 void main() {
   test('eventBusHolder.totalBuses', () {

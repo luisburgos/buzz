@@ -1,34 +1,7 @@
 import 'package:buzz/buzz.dart';
-import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-class BaseAppEvent extends AppEvent {}
-
-class AppEvent1 extends AppEvent {}
-
-class AppEvent2 extends AppEvent {}
-
-class AppEvent3 extends AppEvent {}
-
-class UiEvent1 extends UiEvent {}
-
-class UiEvent2 extends UiEvent {}
-
-class Command1 extends Command {}
-
-class Command2 extends Command {}
-
-class NotAUiEvent {}
-
-//TODO: Verify remove
-class UiEventHandler extends Mock implements TypedEventHandler<UiEvent> {
-  @override
-  void handle(UiEvent event) {
-    print(event.toString());
-  }
-}
-
-class MockNavigator extends Mock implements Navigator {}
+import '../fixtures/navigator.dart';
 
 void initDefaultTestBuzz() {
   Buzz.init(

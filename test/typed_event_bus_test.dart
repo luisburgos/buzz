@@ -2,7 +2,9 @@ import 'package:buzz/buzz.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
-import 'helpers/test_events.dart';
+import 'fixtures/app_events.dart';
+import 'fixtures/other_events.dart';
+import 'fixtures/ui_events.dart';
 
 class UiEventBus extends TypedEventBus<UiEvent> {}
 
