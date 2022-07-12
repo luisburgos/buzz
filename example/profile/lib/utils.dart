@@ -1,4 +1,4 @@
-import 'package:buzz/utils.dart';
+import 'package:buzz/buzz.dart' show buzzLog;
 import 'package:flutter/material.dart';
 
 void profileLog(String message) {

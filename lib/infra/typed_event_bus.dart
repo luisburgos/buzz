@@ -2,8 +2,6 @@ import 'package:buzz/buzz.dart';
 import 'package:buzz/utils/subtype_checker.dart';
 import 'package:event_bus/event_bus.dart';
 
-import '../utils.dart';
-
 abstract class TypedEventBus<T> {
   final _eventBus = EventBus();
 

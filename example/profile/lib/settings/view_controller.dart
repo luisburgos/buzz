@@ -1,4 +1,4 @@
-import 'package:buzz/in_memory_events_store.dart';
+import 'package:buzz/buzz.dart' show EventRecordsInMemoryStore;
 import 'package:core/core.dart';
 import 'package:get/get.dart';
 

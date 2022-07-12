@@ -1,5 +1,5 @@
 import 'package:buzz/infra/typed_event_bus.dart';
-import 'package:buzz/utils.dart';
+import 'package:buzz/utils/utils.dart';
 
 import 'infra/errors.dart';
 import 'infra/event_bus_holder.dart';

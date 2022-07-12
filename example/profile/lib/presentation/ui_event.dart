@@ -1,5 +1,4 @@
 import 'package:buzz/buzz.dart';
-import 'package:buzz/utils.dart';
 
 import '../commands/change_user_name_command.dart';
 import '../routes.dart';
