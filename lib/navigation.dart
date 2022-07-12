@@ -89,9 +89,9 @@ class NavigationCommandHandler extends TypedEventHandler<NavigationCommand> {
   bool _canPop() => navigator.canPop();
 }
 
-abstract class NavigateEvent extends AppEvent {}
+abstract class NavigationEvent extends AppEvent {}
 
-class OnNavigatedToEvent extends NavigateEvent {
+class OnNavigatedToEvent extends NavigationEvent {
   OnNavigatedToEvent(this.path);
 
   final String path;
@@ -102,7 +102,7 @@ class OnNavigatedToEvent extends NavigateEvent {
   }
 }
 
-class OnNavigatedBackEvent extends NavigateEvent {
+class OnNavigatedBackEvent extends NavigationEvent {
   OnNavigatedBackEvent({
     this.fallbackPath,
   });
