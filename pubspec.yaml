@@ -1,6 +1,7 @@
 name: buzz
 description: An opinionated scalable framework for modern mobile apps
 version: 0.0.1
+homepage: https://github.com/LuisBurgos/buzz
 publish_to: none
 
 environment:
