@@ -8,6 +8,7 @@
 ### Bug Fixes
 
 * readme typos and descriptions ([05a7eeb](https://github.com/LuisBurgos/buzz/commit/05a7eebfae5f96c59da331fc6b6014f9b700a1bf))
+* solve pub publish issues ([8b6610d](https://github.com/LuisBurgos/buzz/commit/8b6610d42e74e9eb033aba343ae43451f8692442))
 
 
 ### Features
