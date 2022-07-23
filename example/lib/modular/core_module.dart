@@ -1,8 +1,9 @@
 import 'package:buzz/buzz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:profile/profile.dart';
 
 import '../shared/app_routes.dart';
+import '../shared/modules/profile/data/profile_repository.dart';
+import '../shared/modules/profile/module_registry.dart';
 import '../shared/not_found_page.dart';
 import 'home/home_module.dart';
 import 'overrides/app_navigator.dart';

@@ -1,23 +1,35 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
+import 'in_memory_events_store.dart';
+
 ///TODO: Add clear events cache log action
 class EventRecordsView extends StatelessWidget {
-  static const String routeName = "/app-behavior";
+  static const String routeName = "/buzz-events";
 
   const EventRecordsView({
     Key? key,
     required this.eventsStoreStream,
     this.customColorDecorator,
+    required this.onDeleteEventsPressed,
   }) : super(key: key);
 
   final Stream<List<EventRecord>> eventsStoreStream;
   final Color Function(EventRecord)? customColorDecorator;
+  final Function() onDeleteEventsPressed;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.delete_forever),
+              onPressed: onDeleteEventsPressed,
+            )
+          ],
+        ),
         body: EventRecordsViewStreamBuilder(
           eventsStoreStream: eventsStoreStream,
           customColorDecorator: customColorDecorator,

@@ -1,7 +1,7 @@
 import 'package:buzz/buzz.dart';
 import 'package:get/get.dart';
-import 'package:profile/data/profile_repository.dart';
 
+import '../data/profile_repository.dart';
 import '../model/profile.dart';
 import 'ui_event.dart';
 

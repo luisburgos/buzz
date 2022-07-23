@@ -1,7 +1,7 @@
-name: profile
-description: Example profile feature module
+name: buzz_ui
+description: Buzz UI Components
 version: 0.0.1
-publish_to: 'none'
+publish_to: none
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -10,14 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: 4.6.5
   rxdart: 0.27.4
   core:
     path: '../../packages/core'
-  buzz:
-    path: '../../'
-  buzz_ui:
-    path: '../buzz_ui'
 
 dev_dependencies:
   flutter_test:

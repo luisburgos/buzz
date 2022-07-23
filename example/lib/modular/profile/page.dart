@@ -1,8 +1,8 @@
 import 'package:buzz/buzz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:profile/profile.dart';
 
 import '../../shared/app_routes.dart';
+import '../../shared/modules/profile/presentation/screen.dart';
 
 class ProfileRoute extends ChildRoute {
   ProfileRoute()

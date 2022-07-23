@@ -1,4 +1,4 @@
-import 'package:core/in_memory_store.dart';
+import 'package:buzz_ui/in_memory_events_store.dart';
 
 import '../model/profile.dart';
 import '../model/profile_user_info.dart';

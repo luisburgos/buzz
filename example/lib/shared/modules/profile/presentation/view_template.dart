@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../profile.dart';
+import '../model/profile_option.dart';
 
 class ProfileViewTemplate extends StatelessWidget {
   const ProfileViewTemplate({

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profile/presentation/view.dart';
+
+import 'view.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({

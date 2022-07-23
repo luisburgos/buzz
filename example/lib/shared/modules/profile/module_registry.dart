@@ -1,8 +1,8 @@
 import 'package:buzz/buzz.dart';
-import 'package:profile/data/profile_repository.dart';
-import 'package:profile/presentation/ui_event.dart';
 
 import 'commands/change_user_name_command.dart';
+import 'data/profile_repository.dart';
+import 'presentation/ui_event.dart';
 
 class ProfileModuleRegistries extends ModuleBuzzRegistries {
   ProfileModuleRegistries(this.findRepository);

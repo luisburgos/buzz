@@ -1,8 +1,8 @@
 import 'package:buzz/buzz.dart';
 import 'package:get/get.dart';
-import 'package:profile/profile.dart';
 
 import '../../shared/app_routes.dart';
+import '../../shared/modules/profile/presentation/screen.dart';
 import '../extensions/get_module.dart';
 
 class ProfileRoute extends GetRoute {

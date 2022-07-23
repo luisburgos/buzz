@@ -1,6 +1,6 @@
 import 'package:buzz/buzz.dart';
 
-import '../profile.dart';
+import '../data/profile_repository.dart';
 
 class ChangeUserNameCommand extends Command {
   ChangeUserNameCommand({required this.newName});

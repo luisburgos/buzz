@@ -11,5 +11,4 @@ export 'kinds/app_events.dart';
 export 'kinds/commands.dart';
 export 'kinds/ui_events.dart';
 export 'navigation/navigation.dart';
-export 'utils/in_memory_events_store.dart';
 export 'utils/utils.dart';

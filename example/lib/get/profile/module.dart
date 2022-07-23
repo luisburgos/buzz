@@ -1,7 +1,7 @@
 import 'package:example/get/profile/page.dart';
 import 'package:get/get.dart';
-import 'package:profile/profile.dart';
 
+import '../../shared/modules/profile/data/profile_repository.dart';
 import '../extensions/get_module.dart';
 
 class ProfileModule extends GetModule {

@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:profile/profile.dart';
 
+import '../../shared/modules/profile/data/profile_repository.dart';
 import 'page.dart';
 
 class ProfileModule extends Module {
