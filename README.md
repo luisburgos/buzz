@@ -4,8 +4,8 @@ Opinionated modern event based application development framework.
 
 ## Documentation
 
-- Learn more about the pre-defined [EventBuses and Events](./docs/EVENT_BUSES.md).
-- Learn more how to create the required instance of the [Navigator](./docs/NAVIGATOR.md) component.
+- Learn more about the pre-defined [EventBuses and Events](doc/EVENT_BUSES.md).
+- Learn more how to create the required instance of the [Navigator](doc/NAVIGATOR.md) component.
 
 ## Features
 
@@ -43,11 +43,11 @@ By default the framework supports firing three base class events:
 - `Command`
 - `AppEvent`
 
-Find pre-defined [out-of-the-box supported events](./docs/EVENTS.md).
+Find pre-defined [out-of-the-box supported events](doc/EVENTS.md).
 
 ### UiEvents
 
-The library comes with a few pre-defined `UiEvents` you can find [here](./docs/EVENTS.md).
+The library comes with a few pre-defined `UiEvents` you can find [here](doc/EVENTS.md).
 
 For example, when a button/label is tapped:
 
@@ -62,7 +62,7 @@ ElevatedButton(
 
 ### NavigationCommands
 
-The library comes with a few pre-defined `NavigationCommands` you can find [here](./docs/EVENTS.md).
+The library comes with a few pre-defined `NavigationCommands` you can find [here](doc/EVENTS.md).
 
 Go to a route:
 
