@@ -1,4 +1,9 @@
-# [](https://github.com/LuisBurgos/buzz/compare/v0.0.1...v) (2022-07-23)
+## [0.0.2](https://github.com/LuisBurgos/buzz/compare/v0.0.1...v0.0.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* allow generic types on event handlers ([3c0b41d](https://github.com/LuisBurgos/buzz/commit/3c0b41dff8564a4edd4b2411182009acfa8de5c7))
 
 
 
