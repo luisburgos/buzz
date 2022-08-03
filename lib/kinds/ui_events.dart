@@ -3,7 +3,7 @@ import '../infra/typed_event_handler.dart';
 
 abstract class UiEvent {}
 
-abstract class UIEventHandler extends TypedEventHandler<UiEvent> {}
+abstract class UiEventHandler<U extends UiEvent> extends TypedEventHandler<U> {}
 
 class UiEventBus extends TypedEventBus<UiEvent> {}
 

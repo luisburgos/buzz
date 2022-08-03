@@ -3,6 +3,6 @@ import '../infra/typed_event_handler.dart';
 
 abstract class Command {}
 
-abstract class CommandHandler extends TypedEventHandler<Command> {}
+abstract class CommandHandler<C extends Command> extends TypedEventHandler<C> {}
 
-class CommandEventBus extends TypedEventBus<Command> {}
+class CommandEventBus<C extends Command> extends TypedEventBus<C> {}
