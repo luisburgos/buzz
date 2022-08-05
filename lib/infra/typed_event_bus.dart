@@ -1,8 +1,17 @@
+import 'dart:async';
+
 import 'package:buzz/buzz.dart';
 import 'package:buzz/utils/subtype_checker.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class TypedEventBus<T> {
+  @visibleForTesting
+  StreamController get eventBusStreamController => _eventBus.streamController;
+
+  @visibleForTesting
+  Stream get eventBusStream => eventBusStreamController.stream;
+
   final _eventBus = EventBus();
 
   bool isTypeSupported<X>() {
