@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/LuisBurgos/buzz/compare/v0.0.2...v0.0.3) (2022-08-05)
+
+
+### Features
+
+* add event bus visible for testing properties ([214867a](https://github.com/LuisBurgos/buzz/commit/214867a8d82e1e7e7d320fbf6aaf93d47c204764))
+
+
+
 ## [0.0.2](https://github.com/LuisBurgos/buzz/compare/v0.0.1...v0.0.2) (2022-08-03)
 
 
