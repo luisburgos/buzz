@@ -25,7 +25,7 @@ abstract class IBuzzBase {
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<ModuleBuzzRegistries>? moduleRegistries,
+    List<BuzzEventHandlersRegistries>? moduleRegistries,
   });
 
   void fire(dynamic message);
@@ -50,13 +50,13 @@ class BuzzBase implements IBuzzBase {
 
   late Navigator _navigator;
   late FeedbacksExecutor _feedbacksExecutor;
-  List<ModuleBuzzRegistries>? _moduleRegistries;
+  List<BuzzEventHandlersRegistries>? _moduleRegistries;
 
   @override
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<ModuleBuzzRegistries>? moduleRegistries,
+    List<BuzzEventHandlersRegistries>? moduleRegistries,
   }) {
     _navigator = navigator;
     _feedbacksExecutor = feedbacksExecutor ?? DefaultFeedbacksExecutor();

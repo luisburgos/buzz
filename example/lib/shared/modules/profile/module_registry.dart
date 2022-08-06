@@ -4,7 +4,7 @@ import 'commands/change_user_name_command.dart';
 import 'data/profile_repository.dart';
 import 'presentation/ui_event.dart';
 
-class ProfileModuleRegistries extends ModuleBuzzRegistries {
+class ProfileModuleRegistries extends BuzzEventHandlersRegistries {
   ProfileModuleRegistries(this.findRepository);
 
   final IProfileRepository Function() findRepository;

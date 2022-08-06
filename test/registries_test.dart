@@ -3,13 +3,24 @@ import 'package:test/test.dart';
 
 import 'fixtures/app_events.dart';
 
+class FakeDataRepository {}
+
 void main() {
   test('AppEventRegistry.registryType works for base class', () {
-    final appEventRegistry = AppEventRegistry<BaseAppEvent>(
+    final registry = AppEventRegistry<BaseAppEvent>(
       handler: (event) {
         print(event);
       },
     );
-    expect(appEventRegistry.registryType, BaseAppEvent);
+    expect(registry.registryType, BaseAppEvent);
+  });
+
+  test('DataRegistry.registryType works for fake repository', () {
+    final registry = DataRegistry<FakeDataRepository>(
+      binder: (repository) {
+        print('Add $repository to DI');
+      },
+    );
+    expect(registry.registryType, FakeDataRepository);
   });
 }
