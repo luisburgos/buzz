@@ -18,7 +18,7 @@ class CoreModule extends GetModule {
               ..init(
                 navigator: GetAppNavigator(),
                 feedbacksExecutor: GetFeedbacksExecutor(),
-                moduleRegistries: [
+                eventHandlersRegistries: [
                   ProfileModuleRegistries(
                     () => Get.find<IProfileRepository>(),
                   ),

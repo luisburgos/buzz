@@ -25,7 +25,7 @@ abstract class IBuzzBase {
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<BuzzEventHandlersRegistries>? moduleRegistries,
+    List<BuzzEventHandlersRegistries>? eventHandlersRegistries,
   });
 
   void fire(dynamic message);
@@ -50,17 +50,17 @@ class BuzzBase implements IBuzzBase {
 
   late Navigator _navigator;
   late FeedbacksExecutor _feedbacksExecutor;
-  List<BuzzEventHandlersRegistries>? _moduleRegistries;
+  List<BuzzEventHandlersRegistries>? _eventHandlersRegistries;
 
   @override
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<BuzzEventHandlersRegistries>? moduleRegistries,
+    List<BuzzEventHandlersRegistries>? eventHandlersRegistries,
   }) {
     _navigator = navigator;
     _feedbacksExecutor = feedbacksExecutor ?? DefaultFeedbacksExecutor();
-    _moduleRegistries = moduleRegistries;
+    _eventHandlersRegistries = eventHandlersRegistries;
 
     _bindNavigationCommandHandler();
     _bindRegistries();
@@ -94,10 +94,10 @@ class BuzzBase implements IBuzzBase {
   }
 
   void _bindRegistries() {
-    _moduleRegistries?.forEach((moduleRegistry) {
-      uiEvents.bindRegistries(moduleRegistry.uiEvents);
-      commands.bindRegistries(moduleRegistry.commands);
-      appEvents.bindRegistries(moduleRegistry.appEvents);
+    _eventHandlersRegistries?.forEach((eventHandlerRegistry) {
+      uiEvents.bindRegistries(eventHandlerRegistry.uiEvents);
+      commands.bindRegistries(eventHandlerRegistry.commands);
+      appEvents.bindRegistries(eventHandlerRegistry.appEvents);
     });
   }
 }

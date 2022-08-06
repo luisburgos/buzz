@@ -16,7 +16,7 @@ class CoreModule extends Module {
           (i) => Buzz
             ..init(
               navigator: ModularAppNavigator(),
-              moduleRegistries: [
+              eventHandlersRegistries: [
                 ProfileModuleRegistries(
                   () => Modular.get<IProfileRepository>(),
                 ),

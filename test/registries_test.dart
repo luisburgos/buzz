@@ -14,13 +14,4 @@ void main() {
     );
     expect(registry.registryType, BaseAppEvent);
   });
-
-  test('DataRegistry.registryType works for fake repository', () {
-    final registry = DataRegistry<FakeDataRepository>(
-      binder: (repository) {
-        print('Add $repository to DI');
-      },
-    );
-    expect(registry.registryType, FakeDataRepository);
-  });
 }
