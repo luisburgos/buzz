@@ -14,14 +14,14 @@ class NavigationDirections {
 }
 
 class NavigateToCommand extends NavigationCommand {
+  NavigateToCommand({required this.directions});
+
   NavigateToCommand.named(String named)
       : this(
           directions: NavigationDirections(
             routeBuilder: () => named,
           ),
         );
-
-  NavigateToCommand({required this.directions});
 
   final NavigationDirections directions;
 
@@ -44,4 +44,15 @@ class NavigateBackCommand extends NavigationCommand {
   }
 }
 
-class NavigateBackToCommand extends NavigationCommand {}
+class NavigateBackToCommand extends NavigationCommand {
+  NavigateBackToCommand({required this.directions});
+
+  NavigateBackToCommand.named(String named)
+      : this(
+          directions: NavigationDirections(
+            routeBuilder: () => named,
+          ),
+        );
+
+  final NavigationDirections directions;
+}
