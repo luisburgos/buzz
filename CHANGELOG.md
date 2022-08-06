@@ -1,3 +1,12 @@
+## [0.0.5](https://github.com/LuisBurgos/buzz/compare/v0.0.4...v0.0.5) (2022-08-06)
+
+
+### Features
+
+* add navigate back to command logic ([35fd9a8](https://github.com/LuisBurgos/buzz/commit/35fd9a87142f3fb2fa02b90d40e68b1e68d73379))
+
+
+
 ## [0.0.4](https://github.com/LuisBurgos/buzz/compare/v0.0.3...v0.0.4) (2022-08-06)
 
 
