@@ -1,3 +1,12 @@
+## [0.0.4](https://github.com/LuisBurgos/buzz/compare/v0.0.3...v0.0.4) (2022-08-06)
+
+
+### Features
+
+* add data registries ([230e390](https://github.com/LuisBurgos/buzz/commit/230e390efe83df5c7fb4beab9daf9e9270ad156c))
+
+
+
 ## [0.0.3](https://github.com/LuisBurgos/buzz/compare/v0.0.2...v0.0.3) (2022-08-05)
 
 
