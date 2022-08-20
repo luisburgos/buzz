@@ -94,10 +94,10 @@ class BuzzBase implements IBuzzBase {
   }
 
   void _bindRegistries() {
-    _eventHandlersRegistries?.forEach((eventHandlerRegistry) {
-      uiEvents.bindRegistries(eventHandlerRegistry.uiEvents);
-      commands.bindRegistries(eventHandlerRegistry.commands);
-      appEvents.bindRegistries(eventHandlerRegistry.appEvents);
+    _eventHandlersRegistries?.forEach((eventHandlerRegistry) async {
+      await uiEvents.bindRegistries(eventHandlerRegistry.uiEvents);
+      await commands.bindRegistries(eventHandlerRegistry.commands);
+      await appEvents.bindRegistries(eventHandlerRegistry.appEvents);
     });
   }
 }

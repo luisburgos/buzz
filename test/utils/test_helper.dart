@@ -23,21 +23,21 @@ void buzzTest(
 
     if (expectUiEvents != null) {
       expectLater(
-        Buzz.uiEvents.on(),
+        Buzz.uiEvents.eventBusStream,
         emitsInOrder(expectUiEvents()),
       );
     }
 
     if (expectAppEvents != null) {
       expectLater(
-        Buzz.appEvents.on(),
+        Buzz.appEvents.eventBusStream,
         emitsInOrder(expectAppEvents()),
       );
     }
 
     if (expectCommands != null) {
       expectLater(
-        Buzz.commands.on(),
+        Buzz.commands.eventBusStream,
         emitsInOrder(expectCommands()),
       );
     }

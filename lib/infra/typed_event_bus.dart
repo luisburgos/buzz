@@ -23,25 +23,32 @@ abstract class TypedEventBus<T> {
   dynamic get supportedType => T;
 
   void fire(T event) {
-    buzzLog('$runtimeType - $event');
+    print('$runtimeType - $event');
     _eventBus.fire(event);
   }
 
-  Stream<X> on<X extends T>() {
+  Stream on<X>() {
     return _eventBus.on<X>();
   }
 
-  void bindRegistries(List<EventHandlerRegistry<T>> registries) {
-    for (var registry in registries) {
-      bindRegistry(registry);
-    }
+  Future<void> bindRegistries(List<EventHandlerRegistry> registries) async {
+    return Future.microtask(() {
+      for (var registry in registries) {
+        bindRegistry(registry);
+      }
+    });
   }
 
-  void bindRegistry(EventHandlerRegistry<T> registry) {
-    final stream = on<T>();
-    stream.listen(
+  StreamSubscription bindRegistry(EventHandlerRegistry registry) {
+    final stream = on<T>().where(
       (event) {
-        registry.handler(event);
+        debugPrint('bindRegistry: $event - $registry');
+        return registry.isSupportedType(event);
+      },
+    );
+    return stream.listen(
+      (event) {
+        registry.eventHandler.handle(event);
       },
     );
   }

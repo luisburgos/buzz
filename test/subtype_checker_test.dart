@@ -15,6 +15,7 @@ class SubChildA extends Child {}
 
 class NonRelatedClass {}
 
+@Deprecated('Will be removed on next release')
 void main() {
   group('isValid', () {
     test('Child isValid of Parent', () {

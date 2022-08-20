@@ -10,18 +10,18 @@ class ProfileModuleRegistries extends BuzzEventHandlersRegistries {
   final IProfileRepository Function() findRepository;
 
   @override
-  List<CommandRegistry> get commands => [
-        CommandRegistry<ChangeUserNameCommand>(
-          handler: (command) => ChangeUserNameCommandHandler(
+  List<EventHandlerRegistry> get commands => [
+        EventHandlerRegistry<ChangeUserNameCommand>(
+          ChangeUserNameCommandHandler(
             findRepository(),
           ),
         ),
       ];
 
   @override
-  List<UiEventRegistry<UiEvent>> get uiEvents => [
-        UiEventRegistry<OnTappedProfiledUiEvent>(
-          handler: (event) => GlobalProfileUiEventHandler().handle(event),
+  List<EventHandlerRegistry<UiEvent>> get uiEvents => [
+        EventHandlerRegistry<OnTappedProfiledUiEvent>(
+          GlobalProfileUiEventHandler(),
         ),
       ];
 }

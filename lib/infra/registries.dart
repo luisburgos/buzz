@@ -1,49 +1,38 @@
-import 'package:buzz/buzz.dart';
+import 'package:flutter/foundation.dart';
+
+import 'typed_event_handler.dart';
 
 abstract class IBuzzEventHandlersRegistries {
-  List<CommandRegistry> get commands;
-  List<UiEventRegistry> get uiEvents;
-  List<AppEventRegistry> get appEvents;
+  List<EventHandlerRegistry> get commands;
+  List<EventHandlerRegistry> get uiEvents;
+  List<EventHandlerRegistry> get appEvents;
 }
 
 abstract class BuzzEventHandlersRegistries
     extends IBuzzEventHandlersRegistries {
   @override
-  List<CommandRegistry> get commands => const [];
+  List<EventHandlerRegistry> get commands => const [];
 
   @override
-  List<AppEventRegistry> get appEvents => const [];
+  List<EventHandlerRegistry> get appEvents => const [];
 
   @override
-  List<UiEventRegistry> get uiEvents => const [];
+  List<EventHandlerRegistry> get uiEvents => const [];
 }
 
-class UiEventRegistry<U extends UiEvent> extends EventHandlerRegistry<U> {
-  UiEventRegistry({
-    required Function(U) handler,
-  }) : super(handler: handler);
-}
+class EventHandlerRegistry<T> {
+  EventHandlerRegistry(this.eventHandler);
 
-class CommandRegistry<C extends Command> extends EventHandlerRegistry<C> {
-  CommandRegistry({
-    required Function(C) handler,
-  }) : super(handler: handler);
-}
+  final TypedEventHandler<T> eventHandler;
 
-class AppEventRegistry<A extends AppEvent> extends EventHandlerRegistry<A> {
-  AppEventRegistry({
-    required Function(A) handler,
-  }) : super(handler: handler);
-}
-
-abstract class EventHandlerRegistry<T> {
-  EventHandlerRegistry({
-    required this.handler,
-  });
-
-  final Function(T) handler;
   dynamic get registryType => T;
 
+  bool isSupportedType(dynamic x) {
+    final isSupported = x is T;
+    debugPrint('At $runtimeType, $x isSupported: $isSupported');
+    return isSupported;
+  }
+
   @override
-  String toString() => '$runtimeType type: $T handler: $handler';
+  String toString() => '$runtimeType type: $T handler: $eventHandler';
 }
