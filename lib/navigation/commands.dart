@@ -1,7 +1,5 @@
 import '../kinds/commands.dart';
 
-abstract class NavigationCommand extends Command {}
-
 class NavigationDirections {
   NavigationDirections({required this.routeBuilder});
 
@@ -13,8 +11,12 @@ class NavigationDirections {
   }
 }
 
+abstract class NavigationCommand extends Command {}
+
 class NavigateToCommand extends NavigationCommand {
-  NavigateToCommand({required this.directions});
+  NavigateToCommand({
+    required this.directions,
+  });
 
   NavigateToCommand.named(String named)
       : this(
@@ -42,17 +44,4 @@ class NavigateBackCommand extends NavigationCommand {
   String toString() {
     return '$runtimeType preferredBackDefault: $preferredBackDefault';
   }
-}
-
-class NavigateBackToCommand extends NavigationCommand {
-  NavigateBackToCommand({required this.directions});
-
-  NavigateBackToCommand.named(String named)
-      : this(
-          directions: NavigationDirections(
-            routeBuilder: () => named,
-          ),
-        );
-
-  final NavigationDirections directions;
 }
