@@ -4,10 +4,13 @@ import 'package:test/test.dart';
 import 'mock_feedbacks_executor.dart';
 import 'mock_navigator.dart';
 
-void initDefaultTestBuzz() {
+void initDefaultTestBuzz({
+  Navigator? navigator,
+  FeedbacksExecutor? feedbacksExecutor,
+}) {
   Buzz.init(
-    navigator: MockNavigator(),
-    feedbacksExecutor: MockFeedbacksExecutor(),
+    navigator: navigator ?? MockNavigator(),
+    feedbacksExecutor: feedbacksExecutor ?? MockFeedbacksExecutor(),
   );
 }
 

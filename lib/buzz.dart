@@ -1,7 +1,7 @@
 library buzz;
 
 export 'buzz_impl.dart';
-export 'feedbacks.dart';
+export 'feedbacks/feedbacks.dart';
 export 'infra/errors.dart';
 export 'infra/event_bus_holder.dart';
 export 'infra/registries.dart';

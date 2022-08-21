@@ -69,6 +69,7 @@ class BuzzBase implements IBuzzBase {
     eventHandlersRegistries = registries;
 
     _bindNavigationCommandHandler();
+    _bindFeedbacksCommandHandler();
     _bindRegistries();
 
     initDone = true;
@@ -94,10 +95,18 @@ class BuzzBase implements IBuzzBase {
   }
 
   void _bindNavigationCommandHandler() {
-    commands.on<NavigationCommand>().listen((navigationCommand) {
+    commands.on<NavigationCommand>().listen((command) {
       NavigationCommandHandler(
         navigator: _navigator,
-      ).handle(navigationCommand);
+      ).handle(command);
+    });
+  }
+
+  void _bindFeedbacksCommandHandler() {
+    commands.on<FeedbacksCommand>().listen((command) {
+      FeedbacksCommandHandler(
+        feedbacksExecutor: _feedbacksExecutor,
+      ).handle(command);
     });
   }
 
