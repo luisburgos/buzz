@@ -3,8 +3,8 @@ import 'package:test/test.dart';
 
 import 'fixtures/app_events.dart';
 import 'fixtures/commands.dart';
+import 'fixtures/test_helper.dart';
 import 'fixtures/ui_events.dart';
-import 'utils/test_helper.dart';
 
 void main() {
   group('Buzz interface', () {

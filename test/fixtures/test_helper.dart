@@ -1,7 +1,7 @@
 import 'package:buzz/buzz.dart';
 import 'package:test/test.dart';
 
-import '../fixtures/navigator.dart';
+import 'navigator.dart';
 
 void initDefaultTestBuzz() {
   Buzz.init(

@@ -2,7 +2,7 @@ import 'package:buzz/buzz.dart';
 import 'package:test/test.dart';
 
 import '../fixtures/navigator.dart';
-import '../utils/test_helper.dart';
+import '../fixtures/test_helper.dart';
 
 void main() {
   _initBuzz() {
