@@ -6,20 +6,17 @@ import 'navigator.dart';
 
 class NavigationCommandHandler extends TypedEventHandler<NavigationCommand> {
   NavigationCommandHandler({
-    required this.backDefault,
     required this.navigator,
   });
 
-  final String backDefault;
   final Navigator navigator;
 
   @override
   //ignore: avoid_renaming_method_parameters
   void handle(NavigationCommand command) {
     if (command is NavigateBackCommand) {
-      String fallback = backDefault;
-      //TODO: Watch for duplicated logic. Improve method design.
-      fallback = command.preferredBackDefault ?? backDefault;
+      String fallback =
+          command.preferredBackDefault ?? navigator.backDefaultRoute;
 
       if (_canPop()) {
         navigator.back();
@@ -27,15 +24,18 @@ class NavigationCommandHandler extends TypedEventHandler<NavigationCommand> {
         navigator.offAndToNamed(fallback);
       }
 
-      Buzz.fire(OnNavigatedBackEvent(fallbackPath: fallback));
+      Buzz.fire(
+        OnNavigatedBackEvent(fallbackPath: fallback),
+      );
       return;
     }
 
     if (command is NavigateToCommand) {
       final path = command.directions.routeBuilder();
       navigator.toNamed(path);
-      print('$runtimeType $path');
-      Buzz.fire(OnNavigatedToEvent(path));
+      Buzz.fire(
+        OnNavigatedToEvent(path),
+      );
     }
   }
 

@@ -88,7 +88,6 @@ class BuzzBase implements IBuzzBase {
     commands.on<NavigationCommand>().listen((navigationCommand) {
       NavigationCommandHandler(
         navigator: _navigator,
-        backDefault: _navigator.backDefaultRoute,
       ).handle(navigationCommand);
     });
   }
