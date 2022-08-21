@@ -10,24 +10,30 @@ import 'fixtures/ui_events.dart';
 void main() {
   group('Buzz interface', () {
     test('Buzz.init updates init flag', () {
+      //When
       initDefaultTestBuzz();
+      //Then
       expect((Buzz as BuzzBase).initDone, true);
     });
 
     test('Buzz.init set navigator & feedbacksExecutor properly', () {
+      //When
       initDefaultTestBuzz();
+      //Then
       expect(Buzz.navigator, isNotNull);
       expect(Buzz.feedbacksExecutor, isNotNull);
     });
 
     test('cleanBuzz rebuilds instance when calling again', () {
+      //Given
       initDefaultTestBuzz();
       final initialHashCode = Buzz.hashCode;
-
       expect(Buzz, isNotNull);
       expect(Buzz.navigator, isNotNull);
       expect(Buzz.feedbacksExecutor, isNotNull);
+      //When
       cleanBuzz();
+      //Then
       expect(Buzz, isNotNull);
       expect(
         () => Buzz.navigator,

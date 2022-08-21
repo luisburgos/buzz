@@ -62,4 +62,14 @@ void main() {
     eventBusHolder.destroy();
     expect(eventBusHolder.totalBuses, 0);
   });
+
+  test('cleanBuzz rebuilds instance when calling again', () {
+    //Given
+    final initialHashCode = EventBusHolder.hashCode;
+    expect(EventBusHolder, isNotNull);
+    //When
+    cleanEventBusHolder();
+    //Then
+    expect(EventBusHolder.hashCode == initialHashCode, false);
+  });
 }
