@@ -17,22 +17,24 @@ class NavigationCommandHandler extends TypedEventHandler<NavigationCommand> {
   //ignore: avoid_renaming_method_parameters
   void handle(NavigationCommand command) {
     if (command is NavigateBackCommand) {
-      if (_canPop()) {
-        navigator.back();
-        Buzz.fire(OnNavigatedBackEvent());
-        return;
-      }
-
       String fallback = backDefault;
       //TODO: Watch for duplicated logic. Improve method design.
       fallback = command.preferredBackDefault ?? backDefault;
-      navigator.offAndToNamed(fallback);
+
+      if (_canPop()) {
+        navigator.back();
+      } else {
+        navigator.offAndToNamed(fallback);
+      }
+
       Buzz.fire(OnNavigatedBackEvent(fallbackPath: fallback));
+      return;
     }
 
     if (command is NavigateToCommand) {
       final path = command.directions.routeBuilder();
       navigator.toNamed(path);
+      print('$runtimeType $path');
       Buzz.fire(OnNavigatedToEvent(path));
     }
   }

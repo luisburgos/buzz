@@ -20,9 +20,9 @@ void main() {
   });
 
   group('Only one emit per supported type', () {
-    buzzTest(
+    buzzTestEmitsInOrder(
       'Buzz emits only one UiEvent',
-      expectUiEvents: () => [
+      expectUiEventsMatchers: () => [
         isA<UiEvent1>(),
       ],
       fire: () => [
@@ -30,9 +30,9 @@ void main() {
       ],
     );
 
-    buzzTest(
+    buzzTestEmitsInOrder(
       'Buzz emits only one AppEvent',
-      expectAppEvents: () => [
+      expectAppEventsMatchers: () => [
         isA<AppEvent1>(),
       ],
       fire: () => [
@@ -40,9 +40,9 @@ void main() {
       ],
     );
 
-    buzzTest(
+    buzzTestEmitsInOrder(
       'Buzz emits only one Command',
-      expectCommands: () => [
+      expectCommandsMatchers: () => [
         isA<Command1>(),
       ],
       fire: () => [
@@ -52,13 +52,13 @@ void main() {
   });
 
   group('Emits in order', () {
-    buzzTest(
+    buzzTestEmitsInOrder(
       'Buzz alternately emits of each supported type',
-      expectUiEvents: () => [
+      expectUiEventsMatchers: () => [
         isA<UiEvent1>(),
         isA<UiEvent2>(),
       ],
-      expectAppEvents: () => [
+      expectAppEventsMatchers: () => [
         isA<AppEvent1>(),
         isA<AppEvent2>(),
       ],
@@ -70,15 +70,15 @@ void main() {
       ],
     );
 
-    buzzTest(
+    buzzTestEmitsInOrder(
       'Buzz emits one of each supported type',
-      expectUiEvents: () => [
+      expectUiEventsMatchers: () => [
         isA<UiEvent1>(),
       ],
-      expectAppEvents: () => [
+      expectAppEventsMatchers: () => [
         isA<AppEvent1>(),
       ],
-      expectCommands: () => [
+      expectCommandsMatchers: () => [
         isA<Command1>(),
       ],
       fire: () => [

@@ -9,6 +9,7 @@ void initDefaultTestBuzz() {
   );
 }
 
+@Deprecated('Use [buzzTestEmitsInOrder] instead')
 void buzzTest(
   String message, {
   List<TypeMatcher<UiEvent>> Function()? expectUiEvents,
@@ -44,6 +45,47 @@ void buzzTest(
 
     //When
     for (var element in fire()) {
+      Buzz.fire(element);
+    }
+  });
+}
+
+void buzzTestEmitsInOrder(
+  String message, {
+  Function()? given,
+  required List Function() fire,
+  List<Matcher> Function()? expectUiEventsMatchers,
+  List<Matcher> Function()? expectAppEventsMatchers,
+  List<Matcher> Function()? expectCommandsMatchers,
+}) {
+  test(message, () async {
+    if (given != null) {
+      await given();
+    }
+
+    if (expectUiEventsMatchers != null) {
+      expectLater(
+        Buzz.uiEvents.eventBusStream,
+        emitsInOrder(expectUiEventsMatchers()),
+      );
+    }
+
+    if (expectAppEventsMatchers != null) {
+      expectLater(
+        Buzz.appEvents.eventBusStream,
+        emitsInOrder(expectAppEventsMatchers()),
+      );
+    }
+
+    if (expectCommandsMatchers != null) {
+      expectLater(
+        Buzz.commands.eventBusStream,
+        emitsInOrder(expectCommandsMatchers()),
+      );
+    }
+
+    for (var element in fire()) {
+      print('fire');
       Buzz.fire(element);
     }
   });
