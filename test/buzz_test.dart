@@ -3,12 +3,19 @@ import 'package:test/test.dart';
 
 import 'fixtures/app_events.dart';
 import 'fixtures/commands.dart';
+import 'fixtures/non_supperted_events.dart';
 import 'fixtures/test_helper.dart';
 import 'fixtures/ui_events.dart';
 
 void main() {
   group('Buzz interface', () {
-    test('Buzz.cleanBuzz rebuilds instance when calling again', () {
+    test('Buzz.init updates init flag', () {
+      initDefaultTestBuzz();
+
+      expect((Buzz as BuzzBase).initDone, true);
+    });
+
+    test('cleanBuzz rebuilds instance when calling again', () {
       initDefaultTestBuzz();
       final initialHashCode = Buzz.hashCode;
 
@@ -16,6 +23,14 @@ void main() {
       cleanBuzz();
       expect(Buzz, isNotNull);
       expect(Buzz.hashCode == initialHashCode, false);
+      expect((Buzz as BuzzBase).initDone, false);
+    });
+
+    test('Buzz.fire throws UnsupportedBuzzMessage ', () {
+      expect(
+        () => Buzz.fire(NonSupportedClass()),
+        throwsA(isA<UnsupportedBuzzMessage>()),
+      );
     });
   });
 

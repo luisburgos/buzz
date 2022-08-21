@@ -1,4 +1,5 @@
 import 'package:buzz/buzz.dart';
+import 'package:flutter/foundation.dart';
 
 IBuzzBase? _buzz;
 
@@ -25,7 +26,7 @@ abstract class IBuzzBase {
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<BuzzEventHandlersRegistries>? eventHandlersRegistries,
+    List<BuzzEventHandlersRegistries>? registries,
   });
 
   void fire(dynamic message);
@@ -50,20 +51,27 @@ class BuzzBase implements IBuzzBase {
 
   late Navigator _navigator;
   late FeedbacksExecutor _feedbacksExecutor;
-  List<BuzzEventHandlersRegistries>? _eventHandlersRegistries;
+
+  @visibleForTesting
+  List<BuzzEventHandlersRegistries>? eventHandlersRegistries;
+
+  @visibleForTesting
+  bool initDone = false;
 
   @override
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<BuzzEventHandlersRegistries>? eventHandlersRegistries,
+    List<BuzzEventHandlersRegistries>? registries,
   }) {
     _navigator = navigator;
     _feedbacksExecutor = feedbacksExecutor ?? DefaultFeedbacksExecutor();
-    _eventHandlersRegistries = eventHandlersRegistries;
+    eventHandlersRegistries = registries;
 
     _bindNavigationCommandHandler();
     _bindRegistries();
+
+    initDone = true;
   }
 
   @override
@@ -81,7 +89,8 @@ class BuzzBase implements IBuzzBase {
 
   @override
   void destroy() {
-    //TODO: implement
+    initDone = false;
+    //TODO: Could add finishModule() callback;
   }
 
   void _bindNavigationCommandHandler() {
@@ -93,7 +102,7 @@ class BuzzBase implements IBuzzBase {
   }
 
   void _bindRegistries() {
-    _eventHandlersRegistries?.forEach((eventHandlerRegistry) async {
+    eventHandlersRegistries?.forEach((eventHandlerRegistry) async {
       await uiEvents.bindRegistries(eventHandlerRegistry.uiEvents);
       await commands.bindRegistries(eventHandlerRegistry.commands);
       await appEvents.bindRegistries(eventHandlerRegistry.appEvents);

@@ -21,7 +21,7 @@ void main() {
   test('eventBusHolder.forType throws BuzzChannelNotFound ', () {
     final eventBusHolder = EventBusHolderImpl();
     expect(
-      () => eventBusHolder.forType<BaseAppEvent>(),
+      () => eventBusHolder.forType<AppEvent1>(),
       throwsA(isA<BuzzChannelNotFound>()),
     );
   });
@@ -38,7 +38,7 @@ void main() {
     final eventBusHolder = EventBusHolderImpl()..addEventBus(AppEventBus());
 
     expect(
-      eventBusHolder.forType<BaseAppEvent>(),
+      eventBusHolder.forType<AppEvent1>(),
       isA<AppEventBus>(),
     );
   });

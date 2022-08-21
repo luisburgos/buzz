@@ -3,45 +3,82 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../fixtures/app_events.dart';
+import '../fixtures/commands.dart';
 import '../fixtures/navigator.dart';
+import '../fixtures/ui_events.dart';
 
-typedef BaseAppEventHandler = TypedEventHandler<BaseAppEvent>;
-typedef ChildBaseAppEventHandler = TypedEventHandler<ChildBaseAppEvent>;
+typedef AppEvent1Handler = TypedEventHandler<AppEvent1>;
+typedef ChildAppEvent1Handler = TypedEventHandler<ChildAppEvent1>;
 
-class ChildBaseAppEvent extends BaseAppEvent {}
+class ChildAppEvent1 extends AppEvent1 {}
 
-class TestRegistries extends BuzzEventHandlersRegistries {
+class MockBuzzEventHandlersRegistries extends Mock
+    implements BuzzEventHandlersRegistries {
   static int counter = 0;
 
-  TestRegistries({
-    required List<EventHandlerRegistry> appEvents,
-  }) : _appEvents = appEvents;
+  MockBuzzEventHandlersRegistries({
+    List<EventHandlerRegistry> uiEvents = const [],
+    List<EventHandlerRegistry> commands = const [],
+    List<EventHandlerRegistry> appEvents = const [],
+  })  : _uiEvents = uiEvents,
+        _commands = commands,
+        _appEvents = appEvents;
 
+  final List<EventHandlerRegistry> _uiEvents;
+  final List<EventHandlerRegistry> _commands;
   final List<EventHandlerRegistry> _appEvents;
+
+  @override
+  List<EventHandlerRegistry> get uiEvents => _uiEvents;
+
+  @override
+  List<EventHandlerRegistry> get commands => _commands;
 
   @override
   List<EventHandlerRegistry> get appEvents => _appEvents;
 }
 
-class MockChildBaseAppEventHandler extends Mock
-    implements TypedEventHandler<ChildBaseAppEvent> {}
+class MockUiEvent1Handler extends Mock implements TypedEventHandler<UiEvent1> {}
 
-class MockBaseAppEventHandler extends Mock
-    implements TypedEventHandler<BaseAppEvent> {}
+class MockChildBaseAppEventHandler extends Mock
+    implements TypedEventHandler<ChildAppEvent1> {}
+
+class MockAppEvent1Handler extends Mock
+    implements TypedEventHandler<AppEvent1> {}
+
+class MockCommand1Handler extends Mock implements TypedEventHandler<Command1> {}
 
 void main() {
-  test('AppEventRegistry.registryType works for base class', () {
-    final registry = EventHandlerRegistry<BaseAppEvent>(
-      MockBaseAppEventHandler(),
+  test('EventHandlerRegistry.registryType works for base class', () {
+    final registry = EventHandlerRegistry<AppEvent1>(
+      MockAppEvent1Handler(),
     );
     expect(
       registry.registryType,
-      BaseAppEvent,
+      AppEvent1,
     );
   });
 
-  test('AppEventRegistry.handler matches generic types', () {
-    final registry = EventHandlerRegistry<ChildBaseAppEvent>(
+  test('EventHandlerRegistry.isSupportedType works AppEvent1 in its child', () {
+    final registry = EventHandlerRegistry<AppEvent1>(
+      MockAppEvent1Handler(),
+    );
+    expect(
+      registry.isSupportedType(AppEvent1()),
+      true,
+    );
+    expect(
+      registry.isSupportedType(ChildAppEvent1()),
+      true,
+    );
+    expect(
+      registry.isSupportedType(AppEvent2()),
+      false,
+    );
+  });
+
+  test('EventHandlerRegistry.handler matches generic types', () {
+    final registry = EventHandlerRegistry<ChildAppEvent1>(
       MockChildBaseAppEventHandler(),
     );
 
@@ -52,13 +89,42 @@ void main() {
     );
   });
 
+  test('TestRegistries access to registries matches length by lane', () {
+    final testRegistries = MockBuzzEventHandlersRegistries(
+      uiEvents: [
+        EventHandlerRegistry(MockUiEvent1Handler()),
+      ],
+      commands: [
+        EventHandlerRegistry(
+          MockCommand1Handler(),
+        )
+      ],
+      appEvents: [
+        EventHandlerRegistry(
+          MockChildBaseAppEventHandler(),
+        )
+      ],
+    );
+
+    Buzz.init(
+      navigator: MockNavigator(),
+      registries: [testRegistries],
+    );
+
+    final registriesFromBuzz =
+        (Buzz as BuzzBase).eventHandlersRegistries!.first;
+    expect(registriesFromBuzz.uiEvents.length, 1);
+    expect(registriesFromBuzz.commands.length, 1);
+    expect(registriesFromBuzz.appEvents.length, 1);
+  });
+
   test(
     'AppEventRegistry handler is called when firing event',
     () async {
-      TestRegistries.counter = 0;
+      MockBuzzEventHandlersRegistries.counter = 0;
       final mockChildBaseAppEventHandler = MockChildBaseAppEventHandler();
 
-      final testRegistries = TestRegistries(
+      final testRegistries = MockBuzzEventHandlersRegistries(
         appEvents: [
           EventHandlerRegistry(
             mockChildBaseAppEventHandler,
@@ -67,28 +133,26 @@ void main() {
       );
       Buzz.init(
         navigator: MockNavigator(),
-        eventHandlersRegistries: [
-          testRegistries,
-        ],
+        registries: [testRegistries],
       );
 
       final stream = Buzz.appEvents
           .on()
-          .where((event) => event is ChildBaseAppEvent)
-          .cast<ChildBaseAppEvent>();
+          .where((event) => event is ChildAppEvent1)
+          .cast<ChildAppEvent1>();
 
       print('STREAM: $stream');
 
       //Simulate ChildBaseAppEvent is fired and handler is called.
-      Buzz.fire(ChildBaseAppEvent());
+      Buzz.fire(ChildAppEvent1());
       expect(
         stream,
         emitsInOrder([
-          isA<ChildBaseAppEvent>,
+          isA<ChildAppEvent1>,
         ]),
       );
 
-      expect(TestRegistries.counter, 1);
+      expect(MockBuzzEventHandlersRegistries.counter, 1);
     },
     skip: 'TestRegistries.counter is not updated, mocking methods not working',
   );
