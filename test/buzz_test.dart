@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 import 'fixtures/app_events.dart';
 import 'fixtures/commands.dart';
-import 'fixtures/non_supperted_events.dart';
+import 'fixtures/non_supported_events.dart';
 import 'fixtures/test_helper.dart';
 import 'fixtures/ui_events.dart';
 
