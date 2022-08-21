@@ -1,11 +1,13 @@
 import 'package:buzz/buzz.dart';
 import 'package:test/test.dart';
 
-import 'navigator.dart';
+import 'mock_feedbacks_executor.dart';
+import 'mock_navigator.dart';
 
 void initDefaultTestBuzz() {
   Buzz.init(
     navigator: MockNavigator(),
+    feedbacksExecutor: MockFeedbacksExecutor(),
   );
 }
 

@@ -7,15 +7,25 @@ abstract class UiEventHandler<U extends UiEvent> extends TypedEventHandler<U> {}
 
 class UiEventBus extends TypedEventBus<UiEvent> {}
 
-class OnTapped extends UiEvent {}
+class OnTapped extends UiEvent {
+  OnTapped({
+    this.data,
+  });
+
+  final dynamic data;
+}
 
 enum OnScrollDirection {
   up,
   down,
 }
 
-abstract class OnScroll extends UiEvent {
-  OnScrollDirection get direction;
+class OnScroll extends UiEvent {
+  OnScroll({
+    required this.direction,
+  });
+
+  final OnScrollDirection direction;
 }
 
 enum OnSwipeDirection {
@@ -23,17 +33,30 @@ enum OnSwipeDirection {
   right,
 }
 
-abstract class OnSwipe extends UiEvent {
-  OnSwipeDirection get direction;
+class OnSwipe extends UiEvent {
+  OnSwipe({
+    required this.direction,
+  });
+
+  final OnSwipeDirection direction;
 }
 
-abstract class OnToggleChanged extends UiEvent {
-  bool get isEnabled;
+class OnToggleChanged extends UiEvent {
+  OnToggleChanged({
+    required this.isEnabled,
+  });
+
+  final bool isEnabled;
+
   bool get isDisabled => !isEnabled;
 }
 
-abstract class OnFocusChanged extends UiEvent {
-  bool get hasFocus;
+class OnFocusChanged extends UiEvent {
+  OnFocusChanged({
+    required this.hasFocus,
+  });
+
+  final bool hasFocus;
 }
 
 class OnValueChanged extends UiEvent {}

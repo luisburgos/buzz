@@ -1,7 +1,7 @@
 import 'package:buzz/buzz.dart';
 import 'package:test/test.dart';
 
-import '../fixtures/navigator.dart';
+import '../fixtures/mock_navigator.dart';
 import '../fixtures/test_helper.dart';
 
 void main() {

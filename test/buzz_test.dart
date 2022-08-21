@@ -11,8 +11,13 @@ void main() {
   group('Buzz interface', () {
     test('Buzz.init updates init flag', () {
       initDefaultTestBuzz();
-
       expect((Buzz as BuzzBase).initDone, true);
+    });
+
+    test('Buzz.init set navigator & feedbacksExecutor properly', () {
+      initDefaultTestBuzz();
+      expect(Buzz.navigator, isNotNull);
+      expect(Buzz.feedbacksExecutor, isNotNull);
     });
 
     test('cleanBuzz rebuilds instance when calling again', () {
@@ -20,8 +25,26 @@ void main() {
       final initialHashCode = Buzz.hashCode;
 
       expect(Buzz, isNotNull);
+      expect(Buzz.navigator, isNotNull);
+      expect(Buzz.feedbacksExecutor, isNotNull);
       cleanBuzz();
       expect(Buzz, isNotNull);
+      expect(
+        () => Buzz.navigator,
+        throwsA(
+          predicate<Error>(
+            (error) => error.toString().contains('LateInitializationError'),
+          ),
+        ),
+      );
+      expect(
+        () => Buzz.feedbacksExecutor,
+        throwsA(
+          predicate<Error>(
+            (error) => error.toString().contains('LateInitializationError'),
+          ),
+        ),
+      );
       expect(Buzz.hashCode == initialHashCode, false);
       expect((Buzz as BuzzBase).initDone, false);
     });

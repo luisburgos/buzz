@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 
 import '../fixtures/app_events.dart';
 import '../fixtures/commands.dart';
-import '../fixtures/navigator.dart';
+import '../fixtures/mock_navigator.dart';
 import '../fixtures/ui_events.dart';
 
 typedef AppEvent1Handler = TypedEventHandler<AppEvent1>;

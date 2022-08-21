@@ -2,7 +2,7 @@ import 'package:buzz/buzz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../fixtures/navigator.dart';
+import '../fixtures/mock_navigator.dart';
 
 void main() {
   group('Navigator called from NavigationCommandHandler', () {
