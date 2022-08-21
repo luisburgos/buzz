@@ -29,7 +29,7 @@ void main() {
     test('Buzz.fire throws UnsupportedBuzzMessage ', () {
       expect(
         () => Buzz.fire(NonSupportedClass()),
-        throwsA(isA<UnsupportedBuzzMessage>()),
+        throwsA(isA<UnsupportedBuzzMessageType>()),
       );
     });
   });

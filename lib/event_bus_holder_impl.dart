@@ -32,7 +32,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     if (eventBus != null) {
       return eventBus;
     } else {
-      throw BuzzChannelNotFound(T.toString());
+      throw BuzzTypedEventBusForTypeNotFound(T.toString());
     }
   }
 
@@ -53,7 +53,7 @@ class EventBusHolderImpl implements IEventBusHolder {
     if (eventBus != null) {
       return eventBus as X;
     } else {
-      throw BuzzChannelNotFound(X.toString());
+      throw BuzzTypedEventBusForTypeNotFound(X.toString());
     }
   }
 

@@ -83,7 +83,7 @@ class BuzzBase implements IBuzzBase {
     } else if (message is Command) {
       commands.fire(message);
     } else {
-      throw UnsupportedBuzzMessage(message);
+      throw UnsupportedBuzzMessageType(message);
     }
   }
 
