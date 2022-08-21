@@ -2,8 +2,8 @@ import 'package:buzz/buzz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'fixtures/app_events.dart';
-import 'fixtures/navigator.dart';
+import '../fixtures/app_events.dart';
+import '../fixtures/navigator.dart';
 
 typedef BaseAppEventHandler = TypedEventHandler<BaseAppEvent>;
 typedef ChildBaseAppEventHandler = TypedEventHandler<ChildBaseAppEvent>;
