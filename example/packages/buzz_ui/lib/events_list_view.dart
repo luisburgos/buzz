@@ -54,11 +54,11 @@ class EventRecordsViewStreamBuilder extends StatelessWidget {
     return ManagedStreamBuilder<List<EventRecord>>(
       stream: eventsStoreStream,
       onLoading: () => const Center(child: CircularProgressIndicator()),
+      onError: (error) => Center(child: Text(error)),
       onData: (data) => EventRecordsListView(
         items: data ?? const [],
         colorDecorator: customColorDecorator,
       ),
-      onError: (error) => Center(child: Text(error)),
     );
   }
 }
