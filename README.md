@@ -1,49 +1,35 @@
 # Buzz
 
-Opinionated modern event based application development framework. 
+Opinionated modern event-based application development framework. 
 
-## Documentation
-
-- Learn more about the pre-defined [EventBuses and Events](doc/EVENT_BUSES.md).
-- Learn more how to create the required instance of the [Navigator](doc/NAVIGATOR.md) component.
-
-## Features
-
-- UIEvents
-- Commands
-  - Navigation
-- AppEvents
-
-### Upcoming
-
-- Default navigator using Flutter Navigator 2.0.
-- Support adding custom TypedEventHandlers and EventBuses.
+Built on top of [dart-event-bus](https://github.com/marcojakob/dart-event-bus).
 
 ## Installation
 
 ```yaml
-buzz:
-    git:
-      url: git@github.com:LuisBurgos/buzz.git
-      ref: main
+buzz: 0.0.6
 ```
 
 ## Initialization
 
 ```dart
-Buzz..init(
+Buzz.init(
   navigator: MyAppNavigator(),
+  rootAppRoute: '/',
 );
 ```
+
+Learn more how to create the required instance of the [Navigator](doc/NAVIGATION.md) component.
 
 ## Fire Events
 
 By default the framework supports firing three base class events: 
 - `UiEvent`
 - `Command`
+  - `NavigationCommand`
 - `AppEvent`
 
-Find pre-defined [out-of-the-box supported events](doc/EVENTS.md).
+Find pre-defined [out-of-the-box supported events here](doc/EVENTS.md).
 
 ### UiEvents
 
@@ -60,40 +46,67 @@ ElevatedButton(
 )
 ```
 
-### NavigationCommands
+### Commands
 
-The library comes with a few pre-defined `NavigationCommands` you can find [here](doc/EVENTS.md).
+> TODO: Add
 
-Go to a route:
+### AppEvents
 
-```dart
-Buzz.fire(
-  NavigateToCommand.named('/my-route'),
-);
-```
-
-or go back to previous route:
-
-```dart
-Buzz.fire(NavigateBackCommand());
-```
+> TODO: Add
 
 ## Listen Events
 
-Use the `on` method from the `TypedEventBus` component to get a `Stream` to listen events of a specific class type.
+Use the `on` method from the `Buzz` instance to get a `Stream` to listen events of a specific class type.
 
-For example, here is how we setup the listener for `NavigationCommands` as part of the features ready for you to use, this happens behind the insides:
+Here is how you can add a listener for `NavigationCommand`'s:
 
 ```dart
-final commandBus = EventBusHolder.of<CommandEventBus>();
-final navigationCommandStream = commandBus.on<NavigationCommand>();
-navigationCommandStream.listen((navigationCommand) {
-  NavigationCommandHandler(
-    navigator: _navigator,
-    backDefault: _navigator.backDefaultRoute,
-  ).handle(navigationCommand);
+Buzz.on<NavigationCommand>().listen((navigationCommand) {
+  //TODO: Implement navigation command handler
+  print(navigationCommand);
 });
 ```
+
+## Customization
+
+### Include the Buzz events dashboard
+
+First enable the `withDebugDashboard` flag from the `init` method:
+
+```dart
+Buzz.init(
+  withDebugDashboard: true,
+  navigator: MyAppNavigator(),
+  rootAppRoute: '/',
+);
+```
+
+Now you can use the `EventsDashboardPage` widget. Here is an example on how to declare a route when using [Get](https://pub.dev/packages/get):
+
+```dart
+GetPage(
+  name: EventsDashboardPage.routeName,
+  page: () => const EventsDashboardPage(),
+  transition: Transition.fadeIn,
+),
+```
+
+Finally, navigate to the events dashboard by running:
+
+```dart
+Buzz.fire(GoToBuzzEventsDashboard());
+```
+
+or add a custom button that fires the UiEvent already setup during library initialization:
+
+```dart
+Buzz.fire(GoToBuzzDashboardButtonTapped());
+```
+
+
+## Upcoming Features
+
+- Default navigator using Flutter Navigator 2.0 instead of Get.
 
 ## Test Coverage
 
