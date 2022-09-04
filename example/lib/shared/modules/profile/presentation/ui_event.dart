@@ -13,7 +13,7 @@ class OnGoToSettingsTapped extends OnTappedProfiledUiEvent {}
 class OnOptionSelected extends OnTappedProfiledUiEvent {}
 
 class GlobalProfileUiEventHandler
-    extends TypedEventHandler<OnTappedProfiledUiEvent> {
+    extends BuzzEventHandler<OnTappedProfiledUiEvent> {
   @override
   void handle(OnTappedProfiledUiEvent event) {
     buzzLog('$runtimeType - ${event.toString()}');

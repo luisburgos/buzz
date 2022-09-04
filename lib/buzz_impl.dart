@@ -1,120 +1,72 @@
-import 'package:buzz/buzz.dart';
-import 'package:flutter/foundation.dart';
+import 'package:event_bus/event_bus.dart';
 
-IBuzzBase? _buzz;
+import 'event_dashboard/buzz_registry.dart';
+import 'feedbacks/buzz_registry.dart';
+import 'feedbacks/feedbacks_executor.dart';
+import 'navigation/buzz_registry.dart';
+import 'navigation/navigator.dart';
+import 'utils/logger.dart';
 
-/// Instance of Modular for search binds and route.
-// ignore: non_constant_identifier_names
-IBuzzBase get Buzz {
-  _buzz ??= BuzzBase();
-  return _buzz!;
-}
+///ignore: non_constant_identifier_names
+BuzzBase Buzz = BuzzBase();
 
 void cleanBuzz() {
-  _buzz?.destroy();
-  _buzz = null;
+  //TODO: Evaluate remove
 }
 
-abstract class IBuzzBase {
-  AppEventBus get appEvents;
-  CommandEventBus get commands;
-  UiEventBus get uiEvents;
-
-  Navigator get navigator;
-  FeedbacksExecutor get feedbacksExecutor;
-
-  void init({
-    required Navigator navigator,
-    FeedbacksExecutor? feedbacksExecutor,
-    List<BuzzEventHandlersRegistries>? registries,
-  });
-
-  void fire(dynamic message);
-  void destroy();
-}
-
-class BuzzBase implements IBuzzBase {
-  @override
-  Navigator get navigator => _navigator;
-
-  @override
-  FeedbacksExecutor get feedbacksExecutor => _feedbacksExecutor;
-
-  @override
-  AppEventBus get appEvents => EventBusHolder.of<AppEventBus>();
-
-  @override
-  CommandEventBus get commands => EventBusHolder.of<CommandEventBus>();
-
-  @override
-  UiEventBus get uiEvents => EventBusHolder.of<UiEventBus>();
-
-  late Navigator _navigator;
-  late FeedbacksExecutor _feedbacksExecutor;
-
-  @visibleForTesting
-  List<BuzzEventHandlersRegistries>? eventHandlersRegistries;
-
-  @visibleForTesting
+class BuzzBase extends EventBus {
+  List<BuzzRegistry> registries = [];
   bool initDone = false;
 
-  @override
+  late Navigator navigator;
+  FeedbacksExecutor? feedbacksExecutor;
+
   void init({
     required Navigator navigator,
     FeedbacksExecutor? feedbacksExecutor,
-    List<BuzzEventHandlersRegistries>? registries,
+    bool withDebugDashboard = false,
+    String? rootAppRoute,
+    List<BuzzRegistry> initialRegistries = const [],
   }) {
-    _navigator = navigator;
-    _feedbacksExecutor = feedbacksExecutor ?? DefaultFeedbacksExecutor();
-    eventHandlersRegistries = registries;
+    this.navigator = navigator;
+    this.feedbacksExecutor = feedbacksExecutor;
 
-    _bindNavigationCommandHandler();
-    _bindFeedbacksCommandHandler();
-    _bindRegistries();
+    Buzz.on().listen(
+      (event) => buzzLogger('event fired:  ${event.runtimeType}'),
+    );
+
+    registries.addAll(initialRegistries);
+
+    if (withDebugDashboard) {
+      if (rootAppRoute == null) {
+        throw ArgumentError(
+          'mainAppRoute cannot be null when withDebugDashboard is true',
+        );
+      }
+
+      registries.add(EventsDashboardBuzzRegistry(mainAppRoute: rootAppRoute));
+    }
+
+    registries.add(
+      NavigationBuzzRegistry(
+        navigator: navigator,
+        backDefault: navigator.backDefaultRoute,
+      ),
+    );
+    if (feedbacksExecutor != null) {
+      registries.add(
+        FeedbacksExecutorBuzzRegistry(feedbacksExecutor: feedbacksExecutor),
+      );
+    }
+
+    for (var element in registries) {
+      element.register(Buzz);
+    }
 
     initDone = true;
   }
+}
 
-  @override
-  void fire(dynamic message) {
-    if (message is UiEvent) {
-      uiEvents.fire(message);
-    } else if (message is AppEvent) {
-      appEvents.fire(message);
-    } else if (message is Command) {
-      commands.fire(message);
-    } else {
-      throw UnsupportedBuzzMessageType(message);
-    }
-  }
-
-  @override
-  void destroy() {
-    initDone = false;
-    //TODO: Could add finishModule() callback;
-  }
-
-  void _bindNavigationCommandHandler() {
-    commands.on<NavigationCommand>().listen((command) {
-      NavigationCommandHandler(
-        navigator: _navigator,
-      ).handle(command);
-    });
-  }
-
-  void _bindFeedbacksCommandHandler() {
-    commands.on<FeedbacksCommand>().listen((command) {
-      FeedbacksCommandHandler(
-        feedbacksExecutor: _feedbacksExecutor,
-      ).handle(command);
-    });
-  }
-
-  void _bindRegistries() {
-    eventHandlersRegistries?.forEach((eventHandlerRegistry) async {
-      await uiEvents.bindRegistries(eventHandlerRegistry.uiEvents);
-      await commands.bindRegistries(eventHandlerRegistry.commands);
-      await appEvents.bindRegistries(eventHandlerRegistry.appEvents);
-    });
-  }
+abstract class BuzzRegistry {
+  void register(BuzzBase buzz);
 }

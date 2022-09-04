@@ -11,7 +11,7 @@ class HomeModule extends Module {
           AppRoutes.root,
           child: (context, args) => HomePage(
             onGoToProfilePressed: () {
-              Modular.get<IBuzzBase>().fire(
+              Modular.get<BuzzBase>().fire(
                 NavigateToCommand.named(AppRoutes.profileRoot),
               );
             },

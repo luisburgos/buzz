@@ -9,7 +9,7 @@ class ChangeUserNameCommand extends Command {
 }
 
 class ChangeUserNameCommandHandler
-    extends TypedEventHandler<ChangeUserNameCommand> {
+    extends BuzzEventHandler<ChangeUserNameCommand> {
   ChangeUserNameCommandHandler(this.repository);
 
   final IProfileRepository repository;

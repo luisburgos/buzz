@@ -1,11 +1,8 @@
-import '../infra/typed_event_bus.dart';
-import '../infra/typed_event_handler.dart';
+import '../infra/buzz_event_handler.dart';
 
 abstract class UiEvent {}
 
-abstract class UiEventHandler<U extends UiEvent> extends TypedEventHandler<U> {}
-
-class UiEventBus extends TypedEventBus<UiEvent> {}
+abstract class UiEventHandler<U extends UiEvent> extends BuzzEventHandler<U> {}
 
 class OnTapped extends UiEvent {
   OnTapped({

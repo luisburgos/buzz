@@ -13,7 +13,7 @@ class ProfileRoute extends GetRoute {
         name: AppRoutes.profileRoot,
         page: () => ProfileScreen(
           onBackToHomePressed: () {
-            Get.find<IBuzzBase>().fire(
+            Get.find<BuzzBase>().fire(
               NavigateBackCommand(),
             );
           },

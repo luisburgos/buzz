@@ -1,6 +1,10 @@
-import '../buzz.dart';
+import '../buzz_impl.dart';
+import '../infra/buzz_event_handler.dart';
+import 'commands.dart';
+import 'events.dart';
+import 'feedbacks_executor.dart';
 
-class FeedbacksCommandHandler extends TypedEventHandler<FeedbacksCommand> {
+class FeedbacksCommandHandler extends BuzzEventHandler<FeedbacksCommand> {
   FeedbacksCommandHandler({
     required this.feedbacksExecutor,
   });

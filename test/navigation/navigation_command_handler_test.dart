@@ -13,6 +13,7 @@ void main() {
       () {
         final testNavigationCommandHandler = NavigationCommandHandler(
           navigator: mockNavigator,
+          backDefault: '/',
         );
 
         when(mockNavigator.toNamed('/login')).thenAnswer((_) {});
@@ -34,6 +35,7 @@ void main() {
       () {
         final testNavigationCommandHandler = NavigationCommandHandler(
           navigator: mockNavigator,
+          backDefault: '/',
         );
 
         when(mockNavigator.back()).thenAnswer((_) {});
@@ -53,6 +55,7 @@ void main() {
       () {
         final testNavigationCommandHandler = NavigationCommandHandler(
           navigator: mockNavigator,
+          backDefault: '/',
         );
 
         when(mockNavigator.canPop()).thenAnswer((_) => false);

@@ -2,8 +2,6 @@ import 'package:buzz/buzz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../shared/app_routes.dart';
-import '../shared/modules/profile/data/profile_repository.dart';
-import '../shared/modules/profile/module_registry.dart';
 import '../shared/not_found_page.dart';
 import 'home/home_module.dart';
 import 'overrides/app_navigator.dart';
@@ -16,11 +14,11 @@ class CoreModule extends Module {
           (i) => Buzz
             ..init(
               navigator: ModularAppNavigator(),
-              registries: [
+              /*registries: [
                 ProfileModuleRegistries(
                   () => Modular.get<IProfileRepository>(),
                 ),
-              ],
+              ],*/
             ),
           export: true,
         ),

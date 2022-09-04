@@ -29,21 +29,21 @@ void buzzTest(
 
     if (expectUiEvents != null) {
       expectLater(
-        Buzz.uiEvents.eventBusStream,
+        Buzz.on<UiEvent>,
         emitsInOrder(expectUiEvents()),
       );
     }
 
     if (expectAppEvents != null) {
       expectLater(
-        Buzz.appEvents.eventBusStream,
+        Buzz.on<AppEvent>,
         emitsInOrder(expectAppEvents()),
       );
     }
 
     if (expectCommands != null) {
       expectLater(
-        Buzz.commands.eventBusStream,
+        Buzz.on<AppEvent>,
         emitsInOrder(expectCommands()),
       );
     }
@@ -70,27 +70,27 @@ void buzzTestEmitsInOrder(
 
     if (expectUiEventsMatchers != null) {
       expectLater(
-        Buzz.uiEvents.eventBusStream,
+        Buzz.on<UiEvent>(),
         emitsInOrder(expectUiEventsMatchers()),
       );
     }
 
     if (expectAppEventsMatchers != null) {
       expectLater(
-        Buzz.appEvents.eventBusStream,
+        Buzz.on<AppEvent>(),
         emitsInOrder(expectAppEventsMatchers()),
       );
     }
 
     if (expectCommandsMatchers != null) {
       expectLater(
-        Buzz.commands.eventBusStream,
+        Buzz.on<Command>(),
         emitsInOrder(expectCommandsMatchers()),
       );
     }
 
     for (var element in fire()) {
-      print('fire');
+      print('TEST_HELPER: firing: $element');
       Buzz.fire(element);
     }
   });

@@ -2,6 +2,12 @@ import 'package:buzz/navigation/navigator.dart';
 import 'package:mockito/mockito.dart';
 
 class MockNavigator extends Mock implements Navigator {
+  MockNavigator({
+    this.mockCanPop = true,
+  });
+
+  final bool mockCanPop;
+
   @override
   String get backDefaultRoute => super.noSuchMethod(
         Invocation.method(#backDefaultRoute, []),
@@ -12,8 +18,8 @@ class MockNavigator extends Mock implements Navigator {
   @override
   bool canPop() => super.noSuchMethod(
         Invocation.method(#canPop, []),
-        returnValue: true,
-        returnValueForMissingStub: true,
+        returnValue: mockCanPop,
+        returnValueForMissingStub: mockCanPop,
       );
 
   @override

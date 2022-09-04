@@ -13,7 +13,7 @@ class NotFoundPage extends StatelessWidget {
       action: MainAction(
         label: 'Go Home',
         onPressed: () {
-          Modular.get<IBuzzBase>().fire(
+          Modular.get<BuzzBase>().fire(
             NavigateBackCommand(),
           );
         },

@@ -1,8 +1,6 @@
 import 'package:buzz/buzz.dart';
 import 'package:get/get.dart';
 
-import '../shared/modules/profile/data/profile_repository.dart';
-import '../shared/modules/profile/module_registry.dart';
 import 'extensions/get_module.dart';
 import 'home/module.dart';
 import 'overrides/app_navigator.dart';
@@ -18,11 +16,11 @@ class CoreModule extends GetModule {
               ..init(
                 navigator: GetAppNavigator(),
                 feedbacksExecutor: GetFeedbacksExecutor(),
-                registries: [
+                /*registries: [
                   ProfileModuleRegistries(
                     () => Get.find<IProfileRepository>(),
                   ),
-                ],
+                ],*/
               ),
           );
         }),

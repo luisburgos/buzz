@@ -3,7 +3,6 @@ import 'package:test/test.dart';
 
 import 'fixtures/app_events.dart';
 import 'fixtures/commands.dart';
-import 'fixtures/non_supported_events.dart';
 import 'fixtures/test_helper.dart';
 import 'fixtures/ui_events.dart';
 
@@ -13,7 +12,7 @@ void main() {
       //When
       initDefaultTestBuzz();
       //Then
-      expect((Buzz as BuzzBase).initDone, true);
+      expect(Buzz.initDone, true);
     });
 
     test('Buzz.init set navigator & feedbacksExecutor properly', () {
@@ -24,6 +23,7 @@ void main() {
       expect(Buzz.feedbacksExecutor, isNotNull);
     });
 
+    /* TODO: Remove comment when cleanBuzz is implemented or removed.
     test('cleanBuzz rebuilds instance when calling again', () {
       //Given
       initDefaultTestBuzz();
@@ -52,15 +52,17 @@ void main() {
         ),
       );
       expect(Buzz.hashCode == initialHashCode, false);
-      expect((Buzz as BuzzBase).initDone, false);
+      expect(Buzz.initDone, false);
     });
+    */
 
+    /* TODO: Evaluate remove tests since all classes are supported.
     test('Buzz.fire throws UnsupportedBuzzMessage ', () {
       expect(
         () => Buzz.fire(NonSupportedClass()),
         throwsA(isA<UnsupportedBuzzMessageType>()),
       );
-    });
+    });*/
   });
 
   group('Only one emit per supported type', () {

@@ -11,7 +11,7 @@ class HomeRoute extends GetRoute {
         name: AppRoutes.root,
         page: () => HomePage(
           onGoToProfilePressed: () {
-            Get.find<IBuzzBase>().fire(
+            Get.find<BuzzBase>().fire(
               NavigateToCommand.named(AppRoutes.profileRoot),
             );
           },

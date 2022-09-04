@@ -1,4 +1,4 @@
-import '../kinds/app_events.dart';
+import '../buzz.dart';
 
 abstract class NavigationEvent extends AppEvent {}
 

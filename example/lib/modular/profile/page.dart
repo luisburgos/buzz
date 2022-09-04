@@ -10,7 +10,7 @@ class ProfileRoute extends ChildRoute {
           AppRoutes.profileRoot,
           child: (context, args) => ProfileScreen(
             onBackToHomePressed: () {
-              Modular.get<IBuzzBase>().fire(
+              Modular.get<BuzzBase>().fire(
                 NavigateBackCommand(),
               );
             },
