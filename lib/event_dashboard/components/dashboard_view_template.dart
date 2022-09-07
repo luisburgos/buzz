@@ -37,6 +37,8 @@ class DashboardViewTemplate extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
+        //TODO: Improve colors by supporting dark mode toggling.
+        backgroundColor: Colors.black87,
         body: Column(
           children: [
             Row(

@@ -5,7 +5,7 @@ import 'feedbacks/buzz_registry.dart';
 import 'feedbacks/feedbacks_executor.dart';
 import 'navigation/buzz_registry.dart';
 import 'navigation/navigator.dart';
-import 'utils/logger.dart';
+import 'utils/utils.dart';
 
 ///ignore: non_constant_identifier_names
 BuzzBase Buzz = BuzzBase();
@@ -32,7 +32,7 @@ class BuzzBase extends EventBus {
     this.feedbacksExecutor = feedbacksExecutor;
 
     Buzz.on().listen(
-      (event) => buzzLogger('event fired:  ${event.runtimeType}'),
+      (event) => buzzLog('event fired:  ${event.runtimeType}'),
     );
 
     registries.addAll(initialRegistries);
@@ -40,7 +40,7 @@ class BuzzBase extends EventBus {
     if (withDebugDashboard) {
       if (rootAppRoute == null) {
         throw ArgumentError(
-          'mainAppRoute cannot be null when withDebugDashboard is true',
+          'rootAppRoute cannot be null when withDebugDashboard is true',
         );
       }
 
@@ -60,7 +60,8 @@ class BuzzBase extends EventBus {
     }
 
     for (var element in registries) {
-      element.register(Buzz);
+      buzzLog('register: $element');
+      element.register(this);
     }
 
     initDone = true;

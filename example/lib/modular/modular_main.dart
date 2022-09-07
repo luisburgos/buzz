@@ -1,10 +1,21 @@
+import 'package:buzz/buzz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../bootstrap.dart';
 import 'core_module.dart';
+import 'overrides/app_navigator.dart';
 
 void main() {
+  Buzz.init(
+    navigator: ModularAppNavigator(),
+    /*registries: [
+      ProfileModuleRegistries(
+        () => Get.find<IProfileRepository>(),
+      ),
+    ],*/
+  );
+
   return bootstrap(
     ModularApp(
       module: CoreModule(),

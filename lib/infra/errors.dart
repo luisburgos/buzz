@@ -12,7 +12,8 @@ class UnsupportedBuzzMessageType extends BuzzError {
   ]) : super('$message type is not supported', stackTrace);
 }
 
-abstract class BuzzError implements Exception {
+//TODO: Should be abstract?
+class BuzzError implements Exception {
   final String message;
   final StackTrace? stackTrace;
 

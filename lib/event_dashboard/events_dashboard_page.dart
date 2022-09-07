@@ -7,6 +7,15 @@ import 'components/dashboard_view_template.dart';
 import 'console/console_view.dart';
 import 'utils/default_methods.dart';
 
+class GoToBuzzEventsDashboard extends NavigateToCommand {
+  GoToBuzzEventsDashboard()
+      : super(
+          directions: NavigationDirections(
+            routeBuilder: () => EventsDashboardPage.routeName,
+          ),
+        );
+}
+
 class EventsDashboardPage extends StatelessWidget {
   static String routeName = '/buzz';
 

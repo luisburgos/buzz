@@ -6,6 +6,8 @@ import 'action_model.dart';
 class FireActionsInMemoryRepository {
   Rx<FireActions> current = FireActions().obs;
 
+  static FireActionsInMemoryRepository get to => Get.find();
+
   void save(String tag, ConsoleEntry eventData) {
     current.update((val) {
       val?.addEvent(tag, eventData);

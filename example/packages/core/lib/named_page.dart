@@ -17,15 +17,26 @@ class BasePage extends StatelessWidget {
     this.action,
     this.body,
     this.onSettingsPressed,
+    this.actions = const [],
   }) : super(key: key);
 
   final String name;
   final MainAction? action;
   final Widget? body;
   final Function()? onSettingsPressed;
+  final List<MainAction> actions;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> actionWidgets = [];
+    if (actions.isNotEmpty) {
+      actionWidgets = actions
+          .map(
+            (action) => _MainActionWidget(action: action),
+          )
+          .toList();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
@@ -48,17 +59,34 @@ class BasePage extends StatelessWidget {
           children: [
             Text(name),
             if (body != null) Expanded(child: body!),
-            if (action != null)
-              ElevatedButton(
-                onPressed: () {
-                  if (action!.onPressed != null) {
-                    action!.onPressed!();
-                  }
-                },
-                child: Text(action!.label),
-              )
+            if (action != null) _MainActionWidget(action: action!),
+            ...actionWidgets,
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _MainActionWidget extends StatelessWidget {
+  const _MainActionWidget({
+    Key? key,
+    required this.action,
+  }) : super(key: key);
+
+  final MainAction action;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: ElevatedButton(
+        onPressed: () {
+          if (action.onPressed != null) {
+            action.onPressed!();
+          }
+        },
+        child: Text(action.label),
       ),
     );
   }

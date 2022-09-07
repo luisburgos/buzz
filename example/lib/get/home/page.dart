@@ -10,8 +10,13 @@ class HomeRoute extends GetRoute {
   GetPage get asGetPage => GetPage(
         name: AppRoutes.root,
         page: () => HomePage(
-          onGoToProfilePressed: () {
-            Get.find<BuzzBase>().fire(
+          onGoToBuzzTapped: () {
+            Buzz.fire(
+              GoToBuzzEventsDashboard(),
+            );
+          },
+          onGoToProfileTapped: () {
+            Buzz.fire(
               NavigateToCommand.named(AppRoutes.profileRoot),
             );
           },

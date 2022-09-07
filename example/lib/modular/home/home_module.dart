@@ -10,8 +10,13 @@ class HomeModule extends Module {
         ChildRoute(
           AppRoutes.root,
           child: (context, args) => HomePage(
-            onGoToProfilePressed: () {
-              Modular.get<BuzzBase>().fire(
+            onGoToBuzzTapped: () {
+              Buzz.fire(
+                GoToBuzzEventsDashboard(),
+              );
+            },
+            onGoToProfileTapped: () {
+              Buzz.fire(
                 NavigateToCommand.named(AppRoutes.profileRoot),
               );
             },

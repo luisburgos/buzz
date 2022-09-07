@@ -18,33 +18,36 @@ class EventsDashboardBuzzRegistry extends BuzzRegistry {
 
   @override
   void register(BuzzBase buzz) {
+    Get.put<FireActionsInMemoryRepository>(FireActionsInMemoryRepository());
+
     buzz.on<UiEvent>().listen((event) {
-      Get.find<FireActionsInMemoryRepository>().save(
+      FireActionsInMemoryRepository.to.save(
         'ui',
         ConsoleEntry('$event'),
       );
     });
 
     buzz.on<Command>().listen((event) {
-      Get.find<FireActionsInMemoryRepository>().save(
+      FireActionsInMemoryRepository.to.save(
         'command',
         ConsoleEntry('$event'),
       );
     });
 
     buzz.on<AppEvent>().listen((event) {
-      Get.find<FireActionsInMemoryRepository>().save(
+      FireActionsInMemoryRepository.to.save(
         'app',
         ConsoleEntry('$event'),
       );
     });
 
     buzz.on<GoToDashboardPageUiEvent>().listen((event) {
+      //TODO: Should we use buzz instead of Buzz here?
       Buzz.fire(NavigateToCommand.named(event.route ?? ''));
     });
 
     buzz.on<GoToAppTappedUiEvent>().listen((_) {
-      buzz.fire(NavigateToCommand.named(mainAppRoute));
+      Buzz.fire(NavigateToCommand.named(mainAppRoute));
     });
   }
 }
