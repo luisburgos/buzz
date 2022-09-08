@@ -22,13 +22,6 @@ packages:
       relative: true
     source: path
     version: "0.0.6"
-  buzz_ui:
-    dependency: "direct main"
-    description:
-      path: "packages/buzz_ui"
-      relative: true
-    source: path
-    version: "0.0.1"
   characters:
     dependency: transitive
     description:

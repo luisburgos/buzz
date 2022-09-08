@@ -1,4 +1,3 @@
-import 'package:buzz_ui/events_list_view.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,11 +23,8 @@ class SettingsScreen extends StatelessWidget {
     return Obx(() {
       return BasePage(
         name: 'Profile/Settings',
-        body: EventRecordsView(
-          eventsStoreStream: controller.eventsStore,
-          onDeleteEventsPressed: () {
-            controller.onDeleteEventsPressed();
-          },
+        body: const Center(
+          child: Text('TODO Implement'),
         ),
         action: MainAction(
           label: 'Go to the unknown',

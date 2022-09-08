@@ -16,8 +16,6 @@ dependencies:
   get_storage: 2.0.3
   core:
     path: 'packages/core'
-  buzz_ui:
-    path: 'packages/buzz_ui'
   buzz:
     path: '../'
 
