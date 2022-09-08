@@ -1,5 +1,6 @@
 library core;
 
-export 'json_reader.dart';
-export 'managed_stream_builder.dart';
-export 'named_page.dart';
+export 'src/in_memory_store.dart';
+export 'src/json_reader.dart';
+export 'src/managed_stream_builder.dart';
+export 'src/named_page.dart';
