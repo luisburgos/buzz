@@ -1,3 +1,22 @@
+# [0.1.0](https://github.com/LuisBurgos/buzz/compare/v0.0.6...v0.1.0) (2022-09-08)
+
+
+### Features
+
+* delete buzz_ui package ([e5fd9c0](https://github.com/LuisBurgos/buzz/commit/e5fd9c0b5b773c043b2f0a7ad540725b98c96249))
+* move in memory store to core package ([f5115a1](https://github.com/LuisBurgos/buzz/commit/f5115a1baf1302db12d6302c0d167c2e00bd27c0))
+* redo main lib api ([f8079cf](https://github.com/LuisBurgos/buzz/commit/f8079cf1baae3cbe04eeb2107217afa081ec0a11))
+* update example app with events dashboard ([6a5dcef](https://github.com/LuisBurgos/buzz/commit/6a5dcefb439a0e5e0e5e0b22365eb7950859d103))
+
+
+### BREAKING CHANGES
+
+* buzz_ui package was unnecessary now that the base API lib exposes an events dashboard page
+* Buzz dependency injection was changed. Minor upgrades to lib and example infra
+* Main Buzz interface was completely changed.
+
+
+
 ## [0.0.6](https://github.com/LuisBurgos/buzz/compare/v0.0.5...v0.0.6) (2022-08-21)
 
 
