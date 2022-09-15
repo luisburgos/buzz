@@ -7,7 +7,7 @@ Built on top of [dart-event-bus](https://github.com/marcojakob/dart-event-bus).
 ## Installation
 
 ```yaml
-buzz: 0.0.6
+buzz: 0.1.0
 ```
 
 ## Initialization
