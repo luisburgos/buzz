@@ -1,35 +1,34 @@
 import 'package:buzz/buzz.dart';
+import 'package:example/shared/modules/trivia/new/page.dart';
 import 'package:get/get.dart';
 
 import '../../shared/modules/home/page.dart';
 import '../extensions/get_module.dart';
 
 class HomeModule extends GetModule {
-  final String profileRoute;
+  final String newTriviaRoute;
 
   HomeModule({
-    required this.profileRoute,
+    required this.newTriviaRoute,
   });
 
   @override
   List<GetRoute> get routes => [
-        HomeRoute(profileRoute),
+        HomeRoute(newTriviaRoute),
       ];
 }
 
 class HomeRoute extends GetRoute {
-  HomeRoute(this.profileRoute);
+  HomeRoute(this.newTriviaRoute);
 
-  final String profileRoute;
+  final String newTriviaRoute;
 
   @override
   GetPage get asGetPage => GetPage(
         name: HomePage.routeName,
         page: () => HomePage(
           onNewTriviaGameTap: () {
-            Buzz.fire(
-              NavigateToCommand.named(profileRoute),
-            );
+            Buzz.fire(NavigateToNewTrivia());
           },
           onGoToBuzzTap: () {
             Buzz.fire(

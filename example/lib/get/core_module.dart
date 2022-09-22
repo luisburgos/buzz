@@ -3,7 +3,8 @@ import 'package:example/shared/app_routes.dart';
 import 'package:get/get.dart';
 
 import 'extensions/get_module.dart';
-import 'home/module.dart';
+import 'modules/home_module.dart';
+import 'modules/trivia_module.dart';
 import 'profile/module.dart';
 
 class CoreModule extends GetModule {
@@ -14,8 +15,11 @@ class CoreModule extends GetModule {
   List<GetRoute> get routes => [
         GetModuleRoute(
           module: HomeModule(
-            profileRoute: AppRoutes.profileRoot,
+            newTriviaRoute: AppRoutes.newTrivia,
           ),
+        ),
+        GetModuleRoute(
+          module: TriviaModule(),
         ),
         GetModuleRoute(
           module: ProfileModule(),
