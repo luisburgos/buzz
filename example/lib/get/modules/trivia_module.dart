@@ -1,4 +1,5 @@
 import 'package:buzz/buzz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../shared/modules/trivia/page.dart';
@@ -27,6 +28,10 @@ class TriviaRoute extends GetRoute {
           },
           onSeeScoreboardTap: (triviaId) {
             Buzz.fire(NavigateToTriviaScoreboard(triviaId: triviaId));
+          },
+          onCopyJoinLinkTap: (joinLink) {
+            //TODO: Implement
+            debugPrint(joinLink);
           },
         ),
       );
