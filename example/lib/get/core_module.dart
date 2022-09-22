@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 
 import 'extensions/get_module.dart';
 import 'modules/home_module.dart';
+import 'modules/join_module.dart';
+import 'modules/new_trivia_module.dart';
+import 'modules/profile_module.dart';
 import 'modules/trivia_module.dart';
-import 'profile/module.dart';
 
 class CoreModule extends GetModule {
   @override
@@ -19,7 +21,13 @@ class CoreModule extends GetModule {
           ),
         ),
         GetModuleRoute(
+          module: NewTriviaModule(),
+        ),
+        GetModuleRoute(
           module: TriviaModule(),
+        ),
+        GetModuleRoute(
+          module: JoinModule(),
         ),
         GetModuleRoute(
           module: ProfileModule(),

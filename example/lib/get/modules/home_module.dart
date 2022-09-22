@@ -1,8 +1,8 @@
 import 'package:buzz/buzz.dart';
-import 'package:example/shared/modules/trivia/new/page.dart';
 import 'package:get/get.dart';
 
 import '../../shared/modules/home/page.dart';
+import '../../shared/modules/new_trivia/page.dart';
 import '../extensions/get_module.dart';
 
 class HomeModule extends GetModule {

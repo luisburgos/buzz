@@ -2,8 +2,23 @@ import 'package:buzz/buzz.dart';
 import 'package:get/get.dart';
 
 import '../../shared/app_routes.dart';
+import '../../shared/modules/profile/data/profile_repository.dart';
 import '../../shared/modules/profile/presentation/screen.dart';
 import '../extensions/get_module.dart';
+
+class ProfileModule extends GetModule {
+  @override
+  List<GetBind> get binds => [
+        GetBind(() {
+          Get.put<IProfileRepository>(ProfileRepository());
+        }),
+      ];
+
+  @override
+  List<GetRoute> get routes => [
+        ProfileRoute(),
+      ];
+}
 
 class ProfileRoute extends GetRoute {
   ProfileRoute();
@@ -13,9 +28,7 @@ class ProfileRoute extends GetRoute {
         name: AppRoutes.profileRoot,
         page: () => ProfileScreen(
           onBackToHomePressed: () {
-            Get.find<BuzzBase>().fire(
-              NavigateBackCommand(),
-            );
+            Buzz.fire(NavigateBackCommand());
           },
         ),
         binding: BindingsBuilder(() {

@@ -26,7 +26,7 @@ class NewTriviaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      name: 'New Trivia',
+      name: '$runtimeType',
       actions: [
         MainAction(
           label: 'Done',
