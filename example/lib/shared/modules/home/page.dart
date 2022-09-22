@@ -2,14 +2,17 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  static const String routeName = '/';
+  static const String pageName = 'HomePage';
+
   const HomePage({
     Key? key,
-    required this.onGoToBuzzTapped,
-    required this.onGoToProfileTapped,
+    required this.onGoToBuzzTap,
+    required this.onNewTriviaGameTap,
   }) : super(key: key);
 
-  final Function() onGoToBuzzTapped;
-  final Function() onGoToProfileTapped;
+  final Function() onGoToBuzzTap;
+  final Function() onNewTriviaGameTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +20,17 @@ class HomePage extends StatelessWidget {
       name: 'Home',
       actions: [
         MainAction(
-          label: 'Go to Profile',
+          label: 'New trivia game',
           onPressed: () {
-            debugPrint('$runtimeType onGoToProfileTapped');
-            onGoToProfileTapped();
+            debugPrint('$runtimeType onNewTriviaGameTap');
+            onNewTriviaGameTap();
           },
         ),
         MainAction(
           label: 'Go to Buzz',
           onPressed: () {
             debugPrint('$runtimeType onGoToBuzzTapped');
-            onGoToBuzzTapped();
+            onGoToBuzzTap();
           },
         )
       ],

@@ -1,5 +1,5 @@
 import 'package:buzz/buzz.dart';
-import 'package:example/shared/modules/home/home_page.dart';
+import 'package:example/shared/modules/home/page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../shared/app_routes.dart';
@@ -10,12 +10,12 @@ class HomeModule extends Module {
         ChildRoute(
           AppRoutes.root,
           child: (context, args) => HomePage(
-            onGoToBuzzTapped: () {
+            onGoToBuzzTap: () {
               Buzz.fire(
                 GoToBuzzEventsDashboard(),
               );
             },
-            onGoToProfileTapped: () {
+            onNewTriviaGameTap: () {
               Buzz.fire(
                 NavigateToCommand.named(AppRoutes.profileRoot),
               );
