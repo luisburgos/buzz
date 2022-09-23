@@ -1,0 +1,51 @@
+buzz:
+  modules:
+    - name: "home"
+      initial_route: "/"
+      routes:
+        - path: "/"
+          page_name: "HomePage"
+        - route_name: ""
+    - name: "trivia"
+        initial_route: "/trivia"
+        routes:
+          - path: "/:trivia_id?status="
+            page_name: "trivia_page"
+            components:
+              - name: "_trivia_initial_status_page"
+                attrs:
+                  - name: "triviaId"
+                    type: "string"
+                  - name: "onCopyJoinLinkTap"
+                    type: "function"
+                    params:
+                      - name: "joinLink"
+                        type: "string"
+              - name: "_trivia_started_status_page"
+                attrs:
+                  - name: "triviaId"
+                    type: "string"
+                  - name: "onStartPlayTap"
+                      type: "function"
+                      params:
+                        - name: "triviaId"
+                          type: "string"
+                  - name: "onSeeScoreboardTap"
+                      type: "function"
+                      params:
+                        - name: "triviaId"
+                          type: "string"
+              - name: "_trivia_finished_status_page"
+                attrs:
+                  - name: "triviaId"
+                    type: "string"
+                  - name: "onSeeScoreboardTap"
+                    type: "function"
+                    params:
+                      - name: "triviaId"
+                        type: "string"
+            children:
+              - path: "/play"
+                page_name: "trivia_play_page"
+              - path: "/scoreboard"
+                page_name: "trivia_scoreboard_page"
