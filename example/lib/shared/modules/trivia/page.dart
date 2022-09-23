@@ -52,6 +52,13 @@ class TriviaPage extends StatelessWidget {
       );
     }
 
+    if (status == 'finished') {
+      return _TriviaFinishedStatusPage(
+        triviaId: triviaId,
+        onSeeScoreboardTap: onSeeScoreboardTap,
+      );
+    }
+
     return _TriviaInitialStatusPage(
       triviaId: triviaId,
       onCopyJoinLinkTap: onCopyJoinLinkTap,
@@ -112,6 +119,33 @@ class _TriviaStartedStatusPage extends StatelessWidget {
             onStartPlayTap(triviaId);
           },
         ),
+        MainAction(
+          label: 'See scoreboard',
+          onPressed: () {
+            debugPrint('$runtimeType onSeeScoreboardTap');
+            onSeeScoreboardTap(triviaId);
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _TriviaFinishedStatusPage extends StatelessWidget {
+  const _TriviaFinishedStatusPage({
+    Key? key,
+    required this.triviaId,
+    required this.onSeeScoreboardTap,
+  }) : super(key: key);
+
+  final String triviaId;
+  final Function(String) onSeeScoreboardTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return BasePage(
+      name: '$runtimeType',
+      actions: [
         MainAction(
           label: 'See scoreboard',
           onPressed: () {
