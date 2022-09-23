@@ -44,17 +44,17 @@ class TriviaPage extends StatelessWidget {
     final triviaId = Get.parameters['trivia_id'] ?? '';
     final status = Get.parameters['status'] ?? '';
 
-    if (status == 'started') {
-      return _TriviaStartedStatusPage(
+    if (status == 'finished') {
+      return _TriviaFinishedStatusPage(
         triviaId: triviaId,
-        onStartPlayTap: onStartPlayTap,
         onSeeScoreboardTap: onSeeScoreboardTap,
       );
     }
 
-    if (status == 'finished') {
-      return _TriviaFinishedStatusPage(
+    if (status == 'started') {
+      return _TriviaStartedStatusPage(
         triviaId: triviaId,
+        onStartPlayTap: onStartPlayTap,
         onSeeScoreboardTap: onSeeScoreboardTap,
       );
     }

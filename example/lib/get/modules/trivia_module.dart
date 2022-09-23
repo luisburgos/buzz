@@ -1,4 +1,5 @@
 import 'package:buzz/buzz.dart';
+import 'package:example/shared/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class TriviaRoute extends GetRoute {
 
   @override
   GetPage get asGetPage => GetPage(
-        name: TriviaPage.routeName,
+        name: AppRoutes.trivia,
         page: () => TriviaPage(
           onStartPlayTap: (triviaId) {
             Buzz.fire(NavigateToTriviaPlay(triviaId: triviaId));
