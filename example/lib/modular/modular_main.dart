@@ -6,7 +6,7 @@ import '../bootstrap.dart';
 import 'core_module.dart';
 import 'overrides/app_navigator.dart';
 
-void main() {
+Future main() async {
   Buzz.init(
     navigator: ModularAppNavigator(),
     /*registries: [

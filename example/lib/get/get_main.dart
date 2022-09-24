@@ -8,7 +8,7 @@ import '../shared/not_found_page.dart';
 import 'overrides/app_navigator.dart';
 import 'overrides/feedbacks_executor.dart';
 
-void main() {
+Future main() async {
   Buzz.init(
     withDebugDashboard: true,
     rootAppRoute: '/',
