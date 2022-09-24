@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'components/copy_join_link_view.dart';
-import 'components/trivia_data_view.dart';
+import 'initial/trivia_initial_view.dart';
 
 class NavigateToTrivia extends NavigateToCommand {
   NavigateToTrivia({
@@ -58,7 +57,7 @@ class TriviaPage extends StatelessWidget {
       );
     } else {
       if (status == 'initial') {
-        triviaView = _TriviaInitialStatusView(
+        triviaView = TriviaInitialStatusView(
           triviaId: triviaId,
           onCopyJoinLinkTap: onCopyJoinLinkTap,
         );
@@ -113,7 +112,7 @@ class _TriviaCompleteView extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (_, index) {
         if (index == 0) {
-          return _TriviaInitialStatusView(
+          return TriviaInitialStatusView(
             triviaId: triviaId,
             onCopyJoinLinkTap: onCopyJoinLinkTap,
           );
@@ -132,47 +131,6 @@ class _TriviaCompleteView extends StatelessWidget {
           onSeeScoreboardTap: onSeeScoreboardTap,
         );
       },
-    );
-  }
-}
-
-class _TriviaInitialStatusView extends StatelessWidget {
-  const _TriviaInitialStatusView({
-    Key? key,
-    required this.triviaId,
-    required this.onCopyJoinLinkTap,
-  }) : super(key: key);
-
-  final String triviaId;
-  final Function(String) onCopyJoinLinkTap;
-
-  @override
-  Widget build(BuildContext context) {
-    const joinLink = 'TODO: improve joinLink';
-
-    return BaseContainer(
-      name: '$runtimeType',
-      body: Container(
-        color: Colors.red.shade200,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 50),
-            const TriviaDataView(
-              hostName: 'hostName',
-              triviaName: 'triviaName',
-              triviaDescription: 'triviaDescription',
-              triviaMainQuestion: 'triviaMainQuestion',
-            ),
-            CopyJoinLinkView(
-              joinLink: joinLink,
-              onCopyJoinLinkTap: (joinLink) {
-                //TODO: Implement.
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
