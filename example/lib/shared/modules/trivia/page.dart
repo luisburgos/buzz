@@ -1,7 +1,10 @@
 import 'package:buzz/buzz.dart';
 import 'package:core/core.dart';
+import 'package:example/shared/modules/trivia/components/trivia_data_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'components/copy_join_link_view.dart';
 
 class NavigateToTrivia extends NavigateToCommand {
   NavigateToTrivia({
@@ -82,15 +85,24 @@ class _TriviaInitialStatusPage extends StatelessWidget {
 
     return BasePage(
       name: '$runtimeType',
-      actions: [
-        MainAction(
-          label: 'Copy!',
-          onPressed: () {
-            debugPrint('$runtimeType onStartPlayTap');
-            onCopyJoinLinkTap(joinLink);
-          },
-        ),
-      ],
+      body: Column(
+        children: [
+          const SizedBox(height: 50),
+          const TriviaDataView(
+            hostName: 'hostName',
+            triviaName: 'triviaName',
+            triviaDescription: 'triviaDescription',
+            triviaMainQuestion: 'triviaMainQuestion',
+          ),
+          const Spacer(),
+          CopyJoinLinkView(
+            joinLink: joinLink,
+            onCopyJoinLinkTap: (joinLink) {
+              //TODO: Implement.
+            },
+          ),
+        ],
+      ),
     );
   }
 }

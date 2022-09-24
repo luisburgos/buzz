@@ -6,6 +6,8 @@ import 'modules/trivia/play/page.dart';
 import 'modules/trivia/scoreboard/page.dart';
 
 class AppRoutes {
+  // Home can display Authentication info
+  // Authentication depends on User information and Sessions
   static const root = HomePage.routeName;
   static const newTrivia = NewTriviaPage.routeName;
   static const trivia = TriviaPage.routeName;
@@ -14,5 +16,7 @@ class AppRoutes {
   static const join = JoinPage.routeName;
 
   static const profileRoot = '/profile';
+  static const profileEdit = '/profile/edit';
+  static const profileSettings = '/profile/settings';
   static const notFound = '/not-found';
 }

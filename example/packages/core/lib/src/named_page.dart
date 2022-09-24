@@ -32,7 +32,7 @@ class BasePage extends StatelessWidget {
     if (actions.isNotEmpty) {
       actionWidgets = actions
           .map(
-            (action) => _MainActionWidget(action: action),
+            (action) => MainActionWidget(action: action),
           )
           .toList();
     }
@@ -59,7 +59,7 @@ class BasePage extends StatelessWidget {
           children: [
             Text(name),
             if (body != null) Expanded(child: body!),
-            if (action != null) _MainActionWidget(action: action!),
+            if (action != null) MainActionWidget(action: action!),
             ...actionWidgets,
           ],
         ),
@@ -68,8 +68,8 @@ class BasePage extends StatelessWidget {
   }
 }
 
-class _MainActionWidget extends StatelessWidget {
-  const _MainActionWidget({
+class MainActionWidget extends StatelessWidget {
+  const MainActionWidget({
     Key? key,
     required this.action,
   }) : super(key: key);

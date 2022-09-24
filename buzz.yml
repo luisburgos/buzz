@@ -49,3 +49,7 @@ buzz:
               page_name: "trivia_play_page"
             - path: "/scoreboard"
               page_name: "trivia_scoreboard_page"
+    - name: "join"
+      initial_route: ""
+    - name: "profile"
+      initial_route: ""
