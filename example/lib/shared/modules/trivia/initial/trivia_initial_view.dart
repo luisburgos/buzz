@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/labeled_section.dart';
 import '../components/copy_join_link_view.dart';
 import '../components/trivia_data_view.dart';
 

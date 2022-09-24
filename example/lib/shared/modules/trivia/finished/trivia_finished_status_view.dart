@@ -1,8 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/labeled_section.dart';
-
 class TriviaFinishedStatusView extends StatelessWidget {
   const TriviaFinishedStatusView({
     Key? key,

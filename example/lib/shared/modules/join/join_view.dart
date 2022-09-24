@@ -1,6 +1,5 @@
 import 'package:buzz/buzz.dart';
 import 'package:core/core.dart';
-import 'package:example/shared/components/labeled_section.dart';
 import 'package:example/shared/modules/trivia/components/trivia_data_view.dart';
 import 'package:example/shared/modules/trivia/page.dart';
 import 'package:flutter/material.dart';

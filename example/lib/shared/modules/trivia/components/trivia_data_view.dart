@@ -1,4 +1,4 @@
-import 'package:example/shared/components/labeled_section.dart';
+import 'package:core/components/labeled_section.dart';
 import 'package:flutter/material.dart';
 
 class TriviaDataView extends StatelessWidget {

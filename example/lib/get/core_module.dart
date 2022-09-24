@@ -3,6 +3,7 @@ import 'package:example/shared/app_routes.dart';
 import 'package:get/get.dart';
 
 import 'extensions/get_module.dart';
+import 'modules/auth_module.dart';
 import 'modules/home_module.dart';
 import 'modules/join_module.dart';
 import 'modules/new_trivia_module.dart';
@@ -19,6 +20,9 @@ class CoreModule extends GetModule {
           module: HomeModule(
             newTriviaRoute: AppRoutes.newTrivia,
           ),
+        ),
+        GetModuleRoute(
+          module: AuthModule(),
         ),
         GetModuleRoute(
           module: NewTriviaModule(),

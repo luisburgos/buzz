@@ -5,6 +5,7 @@ import '../bootstrap.dart';
 import '../get/core_module.dart';
 import '../shared/app_routes.dart';
 import '../shared/not_found_page.dart';
+import 'modules/auth_module.dart';
 import 'overrides/app_navigator.dart';
 import 'overrides/feedbacks_executor.dart';
 
@@ -14,11 +15,9 @@ Future main() async {
     rootAppRoute: '/',
     navigator: GetAppNavigator(),
     feedbacksExecutor: GetFeedbacksExecutor(),
-    /*registries: [
-      ProfileModuleRegistries(
-        () => Get.find<IProfileRepository>(),
-      ),
-    ],*/
+    initialRegistries: [
+      AuthModuleBuzzRegistry(),
+    ],
   );
 
   return bootstrap(

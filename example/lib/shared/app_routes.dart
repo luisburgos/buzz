@@ -1,3 +1,5 @@
+import 'package:example/shared/modules/auth/login.dart';
+
 import 'modules/home/page.dart';
 import 'modules/join/page.dart';
 import 'modules/new_trivia/page.dart';
@@ -6,9 +8,9 @@ import 'modules/trivia/play/page.dart';
 import 'modules/trivia/scoreboard/page.dart';
 
 class AppRoutes {
-  // Home can display Authentication info
-  // Authentication depends on User information and Sessions
   static const root = HomePage.routeName;
+  static const login = LoginPage.routeName;
+
   static const newTrivia = NewTriviaPage.routeName;
   static const trivia = TriviaPage.routeName;
   static const triviaPlay = TriviaPlayPage.routeName;
