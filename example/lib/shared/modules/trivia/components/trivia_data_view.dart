@@ -20,15 +20,18 @@ class TriviaDataView extends StatelessWidget {
     return LabeledSection(
       label: 'TriviaData',
       backgroundColor: Colors.blueGrey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _TriviaDataViewLabel(hostName),
-          _TriviaDataViewLabel(triviaName),
-          _TriviaDataViewLabel(triviaDescription),
-          _TriviaDataViewLabel(triviaMainQuestion),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _TriviaDataViewLabel('hostName: $hostName'),
+            _TriviaDataViewLabel('triviaName: $triviaName'),
+            _TriviaDataViewLabel('triviaDescription: $triviaDescription'),
+            _TriviaDataViewLabel('triviaMainQuestion: $triviaMainQuestion'),
+          ],
+        ),
       ),
     );
   }
@@ -47,11 +50,9 @@ class _TriviaDataViewLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 4,
-        horizontal: 12,
+        horizontal: 10,
       ),
-      child: Center(
-        child: Text(content),
-      ),
+      child: Text(content),
     );
   }
 }
