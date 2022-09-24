@@ -23,13 +23,13 @@ class TriviaInitialStatusView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 50),
           const TriviaDataView(
             hostName: 'hostName',
             triviaName: 'triviaName',
             triviaDescription: 'triviaDescription',
             triviaMainQuestion: 'triviaMainQuestion',
           ),
+          const SizedBox(height: 12),
           CopyJoinLinkView(
             joinLink: joinLink,
             onCopyJoinLinkTap: (joinLink) {

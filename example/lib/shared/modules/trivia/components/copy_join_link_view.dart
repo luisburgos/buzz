@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:example/shared/components/labeled_section.dart';
 import 'package:flutter/material.dart';
 
 class CopyJoinLinkView extends StatelessWidget {
@@ -13,29 +14,28 @@ class CopyJoinLinkView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(255, 51, 204, 255),
-              width: 1,
+    return LabeledSection(
+      label: 'JoinLink',
+      backgroundColor: Colors.blueGrey,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(joinLink),
             ),
-            borderRadius: BorderRadius.circular(5),
-            shape: BoxShape.rectangle,
           ),
-          child: Text(joinLink),
-        ),
-        MainActionWidget(
-          action: MainAction(
-            label: 'Copy!',
-            onPressed: () {
-              debugPrint('$runtimeType onStartPlayTap');
-              onCopyJoinLinkTap(joinLink);
-            },
+          MainActionWidget(
+            action: MainAction(
+              label: 'Copy!',
+              onPressed: () {
+                debugPrint('$runtimeType onStartPlayTap');
+                onCopyJoinLinkTap(joinLink);
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
