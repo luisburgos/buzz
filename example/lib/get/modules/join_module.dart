@@ -16,10 +16,6 @@ class JoinRoute extends GetRoute {
   @override
   GetPage get asGetPage => GetPage(
         name: JoinPage.routeName,
-        page: () => JoinPage(
-          onNewTriviaGameTap: () {
-            throw UnimplementedError('Must go to JoinPage');
-          },
-        ),
+        page: () => const JoinPage(),
       );
 }

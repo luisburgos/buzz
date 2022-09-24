@@ -1,13 +1,8 @@
 import 'package:buzz/buzz.dart';
-import 'package:core/core.dart';
-import 'package:example/shared/components/labeled_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'finished/trivia_finished_status_view.dart';
-import 'initial/trivia_initial_view.dart';
-import 'started/trivia_started_view.dart';
+import 'trivia_view.dart';
 
 class NavigateToTrivia extends NavigateToCommand {
   NavigateToTrivia({
@@ -36,54 +31,18 @@ class TriviaPage extends StatelessWidget {
 
   const TriviaPage({
     Key? key,
-    required this.onStartPlayTap,
-    required this.onSeeScoreboardTap,
-    required this.onCopyJoinLinkTap,
-    required this.onGoToStatusTap,
   }) : super(key: key);
-
-  final Function(String) onStartPlayTap;
-  final Function(String) onSeeScoreboardTap;
-  final Function(String) onCopyJoinLinkTap;
-  final Function(String, String) onGoToStatusTap;
 
   @override
   Widget build(BuildContext context) {
     final triviaId = Get.parameters['trivia_id'] ?? '';
-    String? status = Get.parameters['status'];
-
-    late Widget triviaView;
-    if (status == null) {
-      triviaView = _TriviaCompleteView(
-        triviaId: triviaId,
-        onStartPlayTap: onStartPlayTap,
-        onSeeScoreboardTap: onSeeScoreboardTap,
-        onCopyJoinLinkTap: onCopyJoinLinkTap,
-        onGoToStatusTap: onGoToStatusTap,
+    //String? status = Get.parameters['status'];
+    /*TriviaStatus triviaStatus = TriviaStatus.initial;
+    if (status != null) {
+      triviaStatus = TriviaStatus.values.firstWhere(
+        (e) => e.toString() == 'TriviaStatus.$status',
       );
-    } else {
-      if (status == 'initial') {
-        triviaView = TriviaInitialStatusView(
-          triviaId: triviaId,
-          onCopyJoinLinkTap: onCopyJoinLinkTap,
-        );
-      }
-
-      if (status == 'started') {
-        triviaView = TriviaStartedStatusView(
-          triviaId: triviaId,
-          onStartPlayTap: onStartPlayTap,
-          onSeeScoreboardTap: onSeeScoreboardTap,
-        );
-      }
-
-      if (status == 'finished') {
-        triviaView = TriviaFinishedStatusView(
-          triviaId: triviaId,
-          onSeeScoreboardTap: onSeeScoreboardTap,
-        );
-      }
-    }
+    }*/
 
     return Scaffold(
       appBar: AppBar(
@@ -91,25 +50,30 @@ class TriviaPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(child: triviaView),
+          Expanded(
+            child: TriviaView(
+              triviaId: triviaId,
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
+/*
 class _TriviaCompleteView extends StatelessWidget {
   const _TriviaCompleteView({
     Key? key,
     required this.triviaId,
-    required this.onCopyJoinLinkTap,
     required this.onSeeScoreboardTap,
     required this.onStartPlayTap,
     required this.onGoToStatusTap,
+    required this.joinCode,
   }) : super(key: key);
 
   final String triviaId;
-  final Function(String) onCopyJoinLinkTap;
+  final String joinCode;
   final Function(String) onStartPlayTap;
   final Function(String) onSeeScoreboardTap;
   final Function(String, String) onGoToStatusTap;
@@ -122,6 +86,7 @@ class _TriviaCompleteView extends StatelessWidget {
         if (index == 0) {
           return TriviaInitialStatusView(
             triviaId: triviaId,
+            joinCode: joinCode,
             onCopyJoinLinkTap: onCopyJoinLinkTap,
           );
         }
@@ -180,3 +145,4 @@ class _TriviaCompleteView extends StatelessWidget {
     );
   }
 }
+*/

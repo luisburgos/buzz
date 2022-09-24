@@ -8,16 +8,16 @@ class TriviaInitialStatusView extends StatelessWidget {
   const TriviaInitialStatusView({
     Key? key,
     required this.triviaId,
+    required this.joinCode,
     required this.onCopyJoinLinkTap,
   }) : super(key: key);
 
   final String triviaId;
+  final String joinCode;
   final Function(String) onCopyJoinLinkTap;
 
   @override
   Widget build(BuildContext context) {
-    const joinLink = 'TODO: improve joinLink';
-
     return LabeledSection(
       label: 'Initial',
       child: Column(
@@ -31,10 +31,8 @@ class TriviaInitialStatusView extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           CopyJoinLinkView(
-            joinLink: joinLink,
-            onCopyJoinLinkTap: (joinLink) {
-              //TODO: Implement.
-            },
+            joinCode: joinCode,
+            onCopyJoinLinkTap: onCopyJoinLinkTap,
           ),
         ],
       ),

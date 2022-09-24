@@ -1,6 +1,5 @@
 import 'package:buzz/buzz.dart';
 import 'package:example/shared/app_routes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../shared/modules/trivia/page.dart';
@@ -23,27 +22,14 @@ class TriviaRoute extends GetRoute {
   @override
   GetPage get asGetPage => GetPage(
         name: AppRoutes.trivia,
-        page: () => TriviaPage(
-          onStartPlayTap: (triviaId) {
-            Buzz.fire(NavigateToTriviaPlay(triviaId: triviaId));
-          },
-          onSeeScoreboardTap: (triviaId) {
-            Buzz.fire(NavigateToTriviaScoreboard(triviaId: triviaId));
-          },
-          onCopyJoinLinkTap: (joinLink) {
-            //TODO: Implement
-            debugPrint(joinLink);
-          },
-          onGoToStatusTap: (triviaId, status) {
-            Buzz.fire(
-              NavigateToTrivia(
-                triviaId: triviaId,
-                status: status,
-              ),
-            );
-          },
-        ),
+        page: () => const TriviaPage(),
       );
+}
+
+class CopyToClipBoardCommand extends Command {
+  CopyToClipBoardCommand(this.content);
+
+  final String content;
 }
 
 class TriviaPlayRoute extends GetRoute {
