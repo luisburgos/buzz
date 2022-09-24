@@ -1,10 +1,13 @@
 import 'package:buzz/buzz.dart';
 import 'package:core/core.dart';
+import 'package:example/shared/components/labeled_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import 'finished/trivia_finished_status_view.dart';
 import 'initial/trivia_initial_view.dart';
+import 'started/trivia_started_view.dart';
 
 class NavigateToTrivia extends NavigateToCommand {
   NavigateToTrivia({
@@ -36,11 +39,13 @@ class TriviaPage extends StatelessWidget {
     required this.onStartPlayTap,
     required this.onSeeScoreboardTap,
     required this.onCopyJoinLinkTap,
+    required this.onGoToStatusTap,
   }) : super(key: key);
 
   final Function(String) onStartPlayTap;
   final Function(String) onSeeScoreboardTap;
   final Function(String) onCopyJoinLinkTap;
+  final Function(String, String) onGoToStatusTap;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +59,7 @@ class TriviaPage extends StatelessWidget {
         onStartPlayTap: onStartPlayTap,
         onSeeScoreboardTap: onSeeScoreboardTap,
         onCopyJoinLinkTap: onCopyJoinLinkTap,
+        onGoToStatusTap: onGoToStatusTap,
       );
     } else {
       if (status == 'initial') {
@@ -64,7 +70,7 @@ class TriviaPage extends StatelessWidget {
       }
 
       if (status == 'started') {
-        triviaView = _TriviaStartedStatusView(
+        triviaView = TriviaStartedStatusView(
           triviaId: triviaId,
           onStartPlayTap: onStartPlayTap,
           onSeeScoreboardTap: onSeeScoreboardTap,
@@ -72,7 +78,7 @@ class TriviaPage extends StatelessWidget {
       }
 
       if (status == 'finished') {
-        triviaView = _TriviaFinishedStatusView(
+        triviaView = TriviaFinishedStatusView(
           triviaId: triviaId,
           onSeeScoreboardTap: onSeeScoreboardTap,
         );
@@ -99,17 +105,19 @@ class _TriviaCompleteView extends StatelessWidget {
     required this.onCopyJoinLinkTap,
     required this.onSeeScoreboardTap,
     required this.onStartPlayTap,
+    required this.onGoToStatusTap,
   }) : super(key: key);
 
   final String triviaId;
   final Function(String) onCopyJoinLinkTap;
   final Function(String) onStartPlayTap;
   final Function(String) onSeeScoreboardTap;
+  final Function(String, String) onGoToStatusTap;
 
   @override
   Widget build(BuildContext context) {
     return ScrollablePositionedList.builder(
-      itemCount: 3,
+      itemCount: 4,
       itemBuilder: (_, index) {
         if (index == 0) {
           return TriviaInitialStatusView(
@@ -119,81 +127,56 @@ class _TriviaCompleteView extends StatelessWidget {
         }
 
         if (index == 1) {
-          return _TriviaStartedStatusView(
+          return TriviaStartedStatusView(
             triviaId: triviaId,
             onStartPlayTap: onStartPlayTap,
             onSeeScoreboardTap: onSeeScoreboardTap,
           );
         }
 
-        return _TriviaFinishedStatusView(
-          triviaId: triviaId,
-          onSeeScoreboardTap: onSeeScoreboardTap,
+        if (index == 2) {
+          return TriviaFinishedStatusView(
+            triviaId: triviaId,
+            onSeeScoreboardTap: onSeeScoreboardTap,
+          );
+        }
+
+        return LabeledSection(
+          label: 'Page Actions',
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              MainActionWidget(
+                action: MainAction(
+                  label: 'Go to Initial',
+                  onPressed: () {
+                    debugPrint('$runtimeType onGoToStatus');
+                    onGoToStatusTap(triviaId, 'initial');
+                  },
+                ),
+              ),
+              MainActionWidget(
+                action: MainAction(
+                  label: 'Go to Started',
+                  onPressed: () {
+                    debugPrint('$runtimeType onGoToStatus');
+                    onGoToStatusTap(triviaId, 'started');
+                  },
+                ),
+              ),
+              MainActionWidget(
+                action: MainAction(
+                  label: 'Go to Finished',
+                  onPressed: () {
+                    debugPrint('$runtimeType onGoToStatus');
+                    onGoToStatusTap(triviaId, 'finished');
+                  },
+                ),
+              ),
+            ],
+          ),
         );
       },
-    );
-  }
-}
-
-class _TriviaStartedStatusView extends StatelessWidget {
-  const _TriviaStartedStatusView({
-    Key? key,
-    required this.triviaId,
-    required this.onStartPlayTap,
-    required this.onSeeScoreboardTap,
-  }) : super(key: key);
-
-  final String triviaId;
-  final Function(String) onStartPlayTap;
-  final Function(String) onSeeScoreboardTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseContainer(
-      name: '$runtimeType',
-      actions: [
-        MainAction(
-          label: 'Start play!',
-          onPressed: () {
-            debugPrint('$runtimeType onStartPlayTap');
-            onStartPlayTap(triviaId);
-          },
-        ),
-        MainAction(
-          label: 'See scoreboard',
-          onPressed: () {
-            debugPrint('$runtimeType onSeeScoreboardTap');
-            onSeeScoreboardTap(triviaId);
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _TriviaFinishedStatusView extends StatelessWidget {
-  const _TriviaFinishedStatusView({
-    Key? key,
-    required this.triviaId,
-    required this.onSeeScoreboardTap,
-  }) : super(key: key);
-
-  final String triviaId;
-  final Function(String) onSeeScoreboardTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseContainer(
-      name: '$runtimeType',
-      actions: [
-        MainAction(
-          label: 'See scoreboard',
-          onPressed: () {
-            debugPrint('$runtimeType onSeeScoreboardTap');
-            onSeeScoreboardTap(triviaId);
-          },
-        ),
-      ],
     );
   }
 }

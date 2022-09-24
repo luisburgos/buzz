@@ -34,6 +34,14 @@ class TriviaRoute extends GetRoute {
             //TODO: Implement
             debugPrint(joinLink);
           },
+          onGoToStatusTap: (triviaId, status) {
+            Buzz.fire(
+              NavigateToTrivia(
+                triviaId: triviaId,
+                status: status,
+              ),
+            );
+          },
         ),
       );
 }
