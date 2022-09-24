@@ -1,3 +1,4 @@
+import 'package:example/shared/components/labeled_section.dart';
 import 'package:flutter/material.dart';
 
 class TriviaDataView extends StatelessWidget {
@@ -16,13 +17,19 @@ class TriviaDataView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _TriviaDataViewLabel(hostName),
-        _TriviaDataViewLabel(triviaName),
-        _TriviaDataViewLabel(triviaDescription),
-        _TriviaDataViewLabel(triviaMainQuestion),
-      ],
+    return LabeledSection(
+      label: 'TriviaData',
+      backgroundColor: Colors.blueGrey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _TriviaDataViewLabel(hostName),
+          _TriviaDataViewLabel(triviaName),
+          _TriviaDataViewLabel(triviaDescription),
+          _TriviaDataViewLabel(triviaMainQuestion),
+        ],
+      ),
     );
   }
 }
@@ -39,8 +46,8 @@ class _TriviaDataViewLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 16,
-        horizontal: 20,
+        vertical: 4,
+        horizontal: 12,
       ),
       child: Center(
         child: Text(content),
