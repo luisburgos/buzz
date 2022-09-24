@@ -1,10 +1,11 @@
 import 'package:buzz/buzz.dart';
 import 'package:core/core.dart';
-import 'package:example/shared/modules/trivia/components/trivia_data_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'components/copy_join_link_view.dart';
+import 'components/trivia_data_view.dart';
 
 class NavigateToTrivia extends NavigateToCommand {
   NavigateToTrivia({
@@ -45,32 +46,98 @@ class TriviaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final triviaId = Get.parameters['trivia_id'] ?? '';
-    final status = Get.parameters['status'] ?? '';
+    String? status = Get.parameters['status'];
 
-    if (status == 'finished') {
-      return _TriviaFinishedStatusPage(
-        triviaId: triviaId,
-        onSeeScoreboardTap: onSeeScoreboardTap,
-      );
-    }
-
-    if (status == 'started') {
-      return _TriviaStartedStatusPage(
+    late Widget triviaView;
+    if (status == null) {
+      triviaView = _TriviaCompleteView(
         triviaId: triviaId,
         onStartPlayTap: onStartPlayTap,
         onSeeScoreboardTap: onSeeScoreboardTap,
+        onCopyJoinLinkTap: onCopyJoinLinkTap,
       );
+    } else {
+      if (status == 'initial') {
+        triviaView = _TriviaInitialStatusView(
+          triviaId: triviaId,
+          onCopyJoinLinkTap: onCopyJoinLinkTap,
+        );
+      }
+
+      if (status == 'started') {
+        triviaView = _TriviaStartedStatusView(
+          triviaId: triviaId,
+          onStartPlayTap: onStartPlayTap,
+          onSeeScoreboardTap: onSeeScoreboardTap,
+        );
+      }
+
+      if (status == 'finished') {
+        triviaView = _TriviaFinishedStatusView(
+          triviaId: triviaId,
+          onSeeScoreboardTap: onSeeScoreboardTap,
+        );
+      }
     }
 
-    return _TriviaInitialStatusPage(
-      triviaId: triviaId,
-      onCopyJoinLinkTap: onCopyJoinLinkTap,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('$runtimeType'),
+      ),
+      body: Column(
+        children: [
+          Expanded(child: triviaView),
+        ],
+      ),
     );
   }
 }
 
-class _TriviaInitialStatusPage extends StatelessWidget {
-  const _TriviaInitialStatusPage({
+class _TriviaCompleteView extends StatelessWidget {
+  const _TriviaCompleteView({
+    Key? key,
+    required this.triviaId,
+    required this.onCopyJoinLinkTap,
+    required this.onSeeScoreboardTap,
+    required this.onStartPlayTap,
+  }) : super(key: key);
+
+  final String triviaId;
+  final Function(String) onCopyJoinLinkTap;
+  final Function(String) onStartPlayTap;
+  final Function(String) onSeeScoreboardTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollablePositionedList.builder(
+      itemCount: 3,
+      itemBuilder: (_, index) {
+        if (index == 0) {
+          return _TriviaInitialStatusView(
+            triviaId: triviaId,
+            onCopyJoinLinkTap: onCopyJoinLinkTap,
+          );
+        }
+
+        if (index == 1) {
+          return _TriviaStartedStatusView(
+            triviaId: triviaId,
+            onStartPlayTap: onStartPlayTap,
+            onSeeScoreboardTap: onSeeScoreboardTap,
+          );
+        }
+
+        return _TriviaFinishedStatusView(
+          triviaId: triviaId,
+          onSeeScoreboardTap: onSeeScoreboardTap,
+        );
+      },
+    );
+  }
+}
+
+class _TriviaInitialStatusView extends StatelessWidget {
+  const _TriviaInitialStatusView({
     Key? key,
     required this.triviaId,
     required this.onCopyJoinLinkTap,
@@ -83,32 +150,35 @@ class _TriviaInitialStatusPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const joinLink = 'TODO: improve joinLink';
 
-    return BasePage(
+    return BaseContainer(
       name: '$runtimeType',
-      body: Column(
-        children: [
-          const SizedBox(height: 50),
-          const TriviaDataView(
-            hostName: 'hostName',
-            triviaName: 'triviaName',
-            triviaDescription: 'triviaDescription',
-            triviaMainQuestion: 'triviaMainQuestion',
-          ),
-          const Spacer(),
-          CopyJoinLinkView(
-            joinLink: joinLink,
-            onCopyJoinLinkTap: (joinLink) {
-              //TODO: Implement.
-            },
-          ),
-        ],
+      body: Container(
+        color: Colors.red.shade200,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 50),
+            const TriviaDataView(
+              hostName: 'hostName',
+              triviaName: 'triviaName',
+              triviaDescription: 'triviaDescription',
+              triviaMainQuestion: 'triviaMainQuestion',
+            ),
+            CopyJoinLinkView(
+              joinLink: joinLink,
+              onCopyJoinLinkTap: (joinLink) {
+                //TODO: Implement.
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _TriviaStartedStatusPage extends StatelessWidget {
-  const _TriviaStartedStatusPage({
+class _TriviaStartedStatusView extends StatelessWidget {
+  const _TriviaStartedStatusView({
     Key? key,
     required this.triviaId,
     required this.onStartPlayTap,
@@ -121,7 +191,7 @@ class _TriviaStartedStatusPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
+    return BaseContainer(
       name: '$runtimeType',
       actions: [
         MainAction(
@@ -143,8 +213,8 @@ class _TriviaStartedStatusPage extends StatelessWidget {
   }
 }
 
-class _TriviaFinishedStatusPage extends StatelessWidget {
-  const _TriviaFinishedStatusPage({
+class _TriviaFinishedStatusView extends StatelessWidget {
+  const _TriviaFinishedStatusView({
     Key? key,
     required this.triviaId,
     required this.onSeeScoreboardTap,
@@ -155,7 +225,7 @@ class _TriviaFinishedStatusPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
+    return BaseContainer(
       name: '$runtimeType',
       actions: [
         MainAction(

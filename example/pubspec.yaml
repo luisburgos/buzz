@@ -14,6 +14,7 @@ dependencies:
   get: 4.6.5
   flutter_modular: 5.0.2
   get_storage: 2.0.3
+  scrollable_positioned_list: 0.3.4
   core:
     path: 'packages/core'
   buzz:

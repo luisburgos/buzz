@@ -68,6 +68,51 @@ class BasePage extends StatelessWidget {
   }
 }
 
+class BaseContainer extends StatelessWidget {
+  const BaseContainer({
+    Key? key,
+    required this.name,
+    this.action,
+    this.body,
+    this.onSettingsPressed,
+    this.actions = const [],
+  }) : super(key: key);
+
+  final String name;
+  final MainAction? action;
+  final Widget? body;
+  final Function()? onSettingsPressed;
+  final List<MainAction> actions;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> actionWidgets = [];
+    if (actions.isNotEmpty) {
+      actionWidgets = actions
+          .map(
+            (action) => MainActionWidget(action: action),
+          )
+          .toList();
+    }
+
+    return Container(
+      color: Colors.red,
+      width: double.infinity,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(name),
+          if (body != null) Flexible(child: body!),
+          if (action != null) MainActionWidget(action: action!),
+          ...actionWidgets,
+        ],
+      ),
+    );
+  }
+}
+
 class MainActionWidget extends StatelessWidget {
   const MainActionWidget({
     Key? key,
