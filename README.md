@@ -19,7 +19,7 @@ Buzz.init(
 );
 ```
 
-Learn more how to create the required instance of the [Navigator](doc/NAVIGATION.md) component.
+Learn more how to create the required instance of the [Navigator](docs/NAVIGATION.md) component.
 
 ## Fire Events
 
@@ -29,11 +29,11 @@ By default the framework supports firing three base class events:
   - `NavigationCommand`
 - `AppEvent`
 
-Find pre-defined [out-of-the-box supported events here](doc/EVENTS.md).
+Find pre-defined [out-of-the-box supported events here](docs/EVENTS.md).
 
 ### UiEvents
 
-The library comes with a few pre-defined `UiEvents` you can find [here](doc/EVENTS.md).
+The library comes with a few pre-defined `UiEvents` you can find [here](docs/EVENTS.md).
 
 For example, when a button/label is tapped:
 
